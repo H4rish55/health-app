@@ -8,6 +8,7 @@ CORS(app)
 
 stroke_model = joblib.load('strokeModel.pkl')
 diabetes_model = joblib.load('diabetesModel.pkl')
+heart_model = joblib.load('heartModel.pkl')
 
 threshold = 0.22
 
@@ -39,6 +40,25 @@ def predict_diabetes():
 
         prob = diabetes_model.predict_proba(df)[:, 1][0]
         prediction = int(diabetes_model.predict(df)[0])
+
+        return jsonify({
+            "prediction": prediction,
+            "probability": round(float(prob), 3)
+        })
+    
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    
+@app.route('/predict/heart', methods=['POST'])
+def predict_heart():
+    try:
+        data = request.get_json()
+        features = data["features"]
+
+        df = pd.DataFrame([features])
+
+        prob = heart_model.predict_proba(df)[:, 1][0]
+        prediction = int(heart_model.predict(df)[0])
 
         return jsonify({
             "prediction": prediction,

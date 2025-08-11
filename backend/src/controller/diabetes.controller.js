@@ -75,9 +75,9 @@ const diabetes = async (req, res) => {
 
         const { prediction, probability } = response.data
 
-        newStroke.prediction = prediction
-        newStroke.probability = probability
-        await newStroke.save()
+        newDiabetes.prediction = prediction
+        newDiabetes.probability = probability
+        await newDiabetes.save()
 
         return res.status(200).json({
             success: true,
