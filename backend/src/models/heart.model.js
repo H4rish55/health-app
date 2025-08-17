@@ -1,61 +1,65 @@
 const mongoose = require('mongoose')
 
-const strokeSchema = new mongoose.Schema({
-    gender: {
-        type: String,
-        enum: ['Male', 'Female', 'Other'],
-        required: true,
-        trim: true
-    },
+const heartSchema = new mongoose.Schema({
     age: {
         type: Number,
         required: true,
         trim: true
     },
-    hypertension: {
+    sex: {
         type: String,
-        enum: ['Yes', 'No'],
+        enum: ['Male', 'Female'],
         required: true,
         trim: true
     },
-    heart_disease: {
+    chest_pain_type: {
         type: String,
-        enum: ['Yes', 'No'],
+        enum: ['ATA', 'NAP', 'ASY', 'TA'],
         required: true,
         trim: true
     },
-    ever_married: {
-        type: String,
-        enum: ['Yes', 'No'],
-        required: true,
-        trim: true
-    },
-    work_type: {
-        type: String,
-        enum: ['Private', 'Self-employed', 'Govt_job'],
-        required: true,
-        trim: true
-    },
-    residence_type: {
-        type: String,
-        enum: ['Urban', 'Rural'],
-        required: true,
-        trim: true
-    },
-    avg_glucose_level: {
+    resting_bp: {
         type: Number,
         required: true,
         trim: true
     },
-    bmi: {
+    cholesterol: {
         type: Number,
         required: true,
         trim: true
     },
-    smoking_status: {
+    fasting_bs: {
         type: String,
-        enum: ['formerly smoked', 'never smoked', 'smokes', 'Unknown'],
         required: true,
+        enum: ['Normal', 'High'],
+        trim: true
+    },
+    resting_ecg: {
+        type: String,
+        required: true,
+        enum: ['Normal', 'Abnormal'],
+        trim: true
+    },
+    max_hr: {
+        type: Number,
+        required: true,
+        trim: true
+    },
+    exercise_angina: {
+        type: String,
+        required: true,
+        enum: ['Yes', 'No'],
+        trim: true
+    },
+    old_peak: {
+        type: Number,
+        required: true,
+        trim: true
+    },
+    st_slope: {
+        type: String,
+        required: true,
+        enum: ['Up', 'Flat', 'Down'],
         trim: true
     },
     prediction: {
@@ -66,5 +70,5 @@ const strokeSchema = new mongoose.Schema({
     }
 })
 
-const Stroke = mongoose.model('Stroke', strokeSchema)
-module.exports = Stroke
+const Heart = mongoose.model('Heart', heartSchema)
+module.exports = Heart
