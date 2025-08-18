@@ -1,8 +1,14 @@
 const User = require("../models/user.model");
 const bcryptjs = require("bcryptjs");
+const crypto = require("crypto");
 const generateTokenAndSetCookie = require("../utils/genAuthToken");
 const genVerificationCode = require("../utils/genVerificationCode");
-const { sendVerificationEmail, sendWelcomeEmail } = require("../mail/email");
+const {
+  sendVerificationEmail,
+  sendWelcomeEmail,
+  sendResetPasswordEmail,
+  sendResetSuccessEmail,
+} = require("../mail/email");
 
 const signup = async (req, res) => {
   try {
@@ -80,38 +86,41 @@ const signup = async (req, res) => {
 };
 
 const verifyEmail = async (req, res) => {
-    const { code } = req.body
+  const { code } = req.body;
 
-    try {
-        const user = await User.findOne({
-            verificationToken: code,
-            verificationTokenExpiresAt: { $gt: Date.now() }
-        })
-    
-        if(!user){
-            return res.status(400).json({ success: false, message: 'Invalid or expired verification code' })
-        }
-    
-        user.isVerified = true 
-        user.verificationToken = undefined
-        user.verificationTokenExpiresAt = undefined
-        user.save()
+  try {
+    const user = await User.findOne({
+      verificationToken: code,
+      verificationTokenExpiresAt: { $gt: Date.now() },
+    });
 
-        sendWelcomeEmail(user.email, user.username)
-
-        res.status(200).json({
-            success: true,
-            message: 'Email verification successfull',
-            user: {
-                ...user._doc,
-                password: undefined
-            }
-        })
-    } catch (error) {
-        console.log("Error in verifyEmail:", error.message)
-        res.status(500).json({ success: false, message: "Internal Server Error" })
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid or expired verification code",
+      });
     }
-}
+
+    user.isVerified = true;
+    user.verificationToken = undefined;
+    user.verificationTokenExpiresAt = undefined;
+    user.save();
+
+    sendWelcomeEmail(user.email, user.username);
+
+    res.status(200).json({
+      success: true,
+      message: "Email verification successfull",
+      user: {
+        ...user._doc,
+        password: undefined,
+      },
+    });
+  } catch (error) {
+    console.log("Error in verifyEmail:", error.message);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+};
 
 const login = async (req, res) => {
   try {
@@ -176,9 +185,90 @@ const logout = async (req, res) => {
   }
 };
 
+const forgotPassword = async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res
+        .status(400)
+        .json({ success: false, message: "User not found" });
+    }
+
+    const resetToken = crypto.randomBytes(20).toString("hex");
+    const resetTokenExpiresAt = Date.now() + 1 * 60 * 60 * 1000;
+
+    user.resetPasswordToken = resetToken;
+    user.resetPasswordExpiresAt = resetTokenExpiresAt;
+
+    await user.save();
+
+    await sendResetPasswordEmail(
+      user.email,
+      `http://localhost:5173/reset-password/${resetToken}`
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "Password reset link sent to your email",
+    });
+  } catch (error) {
+    console.log("Error in forgot password controller:", error.message);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+};
+
+const resetPassword = async (req, res) => {
+  const { token } = req.params;
+  const { password } = req.body;
+
+  try {
+    const user = await User.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpiresAt: { $gt: Date.now() },
+    });
+
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid or expired verification code",
+      });
+    }
+
+    const hashedPassword = await bcryptjs.hash(password, 10);
+
+    user.password = hashedPassword;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpiresAt = undefined;
+
+    if (password.length < 7) {
+      return res
+        .status(400)
+        .json({
+          success: false,
+          message: "Password must be atleast 7 characters",
+        });
+    }
+
+    await user.save();
+
+    await sendResetSuccessEmail(user.email);
+
+    res
+      .status(200)
+      .json({ success: true, message: "Password reset successfull" });
+  } catch (error) {
+    console.log("Error in reset password controller:", error.message);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+};
+
 module.exports = {
   signup,
   login,
   logout,
   verifyEmail,
+  forgotPassword,
+  resetPassword,
 };
