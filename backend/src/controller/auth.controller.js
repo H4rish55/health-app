@@ -1,6 +1,8 @@
 const User = require("../models/user.model");
 const bcryptjs = require("bcryptjs");
 const generateTokenAndSetCookie = require("../utils/genAuthToken");
+const genVerificationCode = require("../utils/genVerificationCode");
+const { sendVerificationEmail, sendWelcomeEmail } = require("../mail/email");
 
 const signup = async (req, res) => {
   try {
@@ -19,12 +21,10 @@ const signup = async (req, res) => {
     }
 
     if (password.length < 7) {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          message: "Password must be atleast 7 characters",
-        });
+      return res.status(400).json({
+        success: false,
+        message: "Password must be atleast 7 characters",
+      });
     }
 
     const existingUserByEmail = await User.findOne({ email: email });
@@ -50,15 +50,21 @@ const signup = async (req, res) => {
     const salt = await bcryptjs.genSalt(10);
     const hashedPassword = await bcryptjs.hash(password, salt);
 
+    const verificationToken = genVerificationCode();
+
     const newUser = new User({
       username,
       email,
       password: hashedPassword,
       role,
+      verificationToken,
+      verificationTokenExpiresAt: Date.now() + 24 * 60 * 60 * 1000, //24 hours
     });
 
     generateTokenAndSetCookie(newUser._id, res);
     await newUser.save();
+
+    sendVerificationEmail(newUser.email, verificationToken);
 
     res.status(201).json({
       success: true,
@@ -72,6 +78,40 @@ const signup = async (req, res) => {
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 };
+
+const verifyEmail = async (req, res) => {
+    const { code } = req.body
+
+    try {
+        const user = await User.findOne({
+            verificationToken: code,
+            verificationTokenExpiresAt: { $gt: Date.now() }
+        })
+    
+        if(!user){
+            return res.status(400).json({ success: false, message: 'Invalid or expired verification code' })
+        }
+    
+        user.isVerified = true 
+        user.verificationToken = undefined
+        user.verificationTokenExpiresAt = undefined
+        user.save()
+
+        sendWelcomeEmail(user.email, user.username)
+
+        res.status(200).json({
+            success: true,
+            message: 'Email verification successfull',
+            user: {
+                ...user._doc,
+                password: undefined
+            }
+        })
+    } catch (error) {
+        console.log("Error in verifyEmail:", error.message)
+        res.status(500).json({ success: false, message: "Internal Server Error" })
+    }
+}
 
 const login = async (req, res) => {
   try {
@@ -140,4 +180,5 @@ module.exports = {
   signup,
   login,
   logout,
+  verifyEmail,
 };
