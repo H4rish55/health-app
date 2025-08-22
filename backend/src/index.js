@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser')
 const authRoutes = require('./router/auth.route')
 const predictRoutes = require('./router/predict.route')
 const doctorRoutes = require('./router/doctor.route')
+const bmiRoutes = require('./router/bmi.route')
 
 const ENV_VARS = require('../src/config/envVars')
 const connectDB = require('../src/config/db')
@@ -16,6 +17,7 @@ app.use(cookieParser())
 app.use('/api/v1/auth', authRoutes)
 app.use('/api/v1/predict', predictRoutes)
 app.use('/api/v1/doctor', doctorRoutes)
+app.use('/api/v1/bmi', bmiRoutes)
 
 const PORT = ENV_VARS.PORT
 
