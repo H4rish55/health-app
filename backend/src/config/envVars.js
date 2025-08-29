@@ -9,6 +9,8 @@ const ENV_VARS = {
     NODE_ENV: process.env.NODE_ENV,
     MAIL_TOKEN: process.env.MAIL_TOKEN,
     MAIL_ENDPOINT: process.env.MAIL_ENDPOINT,
+    OPENAI_API: process.env.OPENAI_API,
+    SYSTEM_PROMPT: process.env.SYSTEM_PROMPT,
 }
 
 module.exports = ENV_VARS

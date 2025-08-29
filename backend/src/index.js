@@ -5,6 +5,7 @@ const authRoutes = require('./router/auth.route')
 const predictRoutes = require('./router/predict.route')
 const doctorRoutes = require('./router/doctor.route')
 const bmiRoutes = require('./router/bmi.route')
+const chatRoutes = require('./router/chat.route')
 
 const ENV_VARS = require('../src/config/envVars')
 const connectDB = require('../src/config/db')
@@ -18,6 +19,7 @@ app.use('/api/v1/auth', authRoutes)
 app.use('/api/v1/predict', predictRoutes)
 app.use('/api/v1/doctor', doctorRoutes)
 app.use('/api/v1/bmi', bmiRoutes)
+app.use('/api/v1/chat', chatRoutes)
 
 const PORT = ENV_VARS.PORT
 
