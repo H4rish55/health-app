@@ -22,25 +22,22 @@ const chatBot = async (req, res) => {
         ].join("\n")
       : "NO_CONTEXT";
 
-    async () => {
-      const response = await openai.responses.create({
-        model: "gpt-5",
-        input: [
-          { role: "system", content: SYSTEM_PROMPT },
-          { role: "system", content: contextBlock },
-          ...messages,
-        ]
-          .map((m) => `${m.role.toUpperCase()}: ${m.content}`)
-          .join("\n"),
-      });
-    };
+    const response = await openai.responses.create({
+      model: "gpt-5",
+      input: [
+        { role: "system", content: SYSTEM_PROMPT },
+        { role: "system", content: contextBlock },
+        ...messages,
+      ]
+        .map((m) => `${m.role.toUpperCase()}: ${m.content}`)
+        .join("\n"),
+    });
 
     res.status(200).json({
       success: true,
       reply: response.output_text ?? "",
       usage: response.usage ?? null,
     });
-    
   } catch (error) {
     console.log("Error in chatbot controller:", error.messages);
     res.status(500).json({ success: false, message: "Internal Server Error" });
