@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import EyeIcon from "../components/EyeIcon";
+import { Link } from "react-router-dom";
 
 const SignUpPage = () => {
   const [formData, setFormData] = useState({
@@ -10,8 +11,7 @@ const SignUpPage = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState('idle'); // idle, loading, success
-
+  const [submitStatus, setSubmitStatus] = useState("idle"); // idle, loading, success
 
   const selectRole = (role) => {
     setFormData((prev) => ({ ...prev, role }));
@@ -22,20 +22,22 @@ const SignUpPage = () => {
   };
 
   const isFormValid = () => {
-    return formData.username.trim() && 
-           formData.email.trim() && 
-           formData.password && 
-           formData.role && 
-           formData.terms;
-  }
+    return (
+      formData.username.trim() &&
+      formData.email.trim() &&
+      formData.password &&
+      formData.role &&
+      formData.terms
+    );
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    if(!isFormValid()) return
+    e.preventDefault();
+    if (!isFormValid()) return;
 
-    setIsSubmitting(true)
-    setSubmitStatus("loading")
-  }
+    setIsSubmitting(true);
+    setSubmitStatus("loading");
+  };
 
   return (
     <div className="min-h-screen bg-gray-950 relative overflow-hidden">
@@ -249,37 +251,78 @@ const SignUpPage = () => {
               </div>
 
               {/* Submit Button */}
-              <button 
+              <button
                 type="button"
                 onClick={handleSubmit}
                 disabled={!isFormValid() || isSubmitting}
                 className={`w-full py-4 rounded-xl font-semibold text-lg shadow-lg transition-all duration-300 relative overflow-hidden ${
-                  submitStatus === 'success' 
-                    ? 'bg-green-500 text-white' 
-                    : 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:-translate-y-0.5 hover:shadow-xl hover:shadow-indigo-500/25'
+                  submitStatus === "success"
+                    ? "bg-green-500 text-white"
+                    : "bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:-translate-y-0.5 hover:shadow-xl hover:shadow-indigo-500/25"
                 } ${
-                  !isFormValid() || isSubmitting ? 'opacity-50 cursor-not-allowed hover:translate-y-0 hover:shadow-lg' : ''
+                  !isFormValid() || isSubmitting
+                    ? "opacity-50 cursor-not-allowed hover:translate-y-0 hover:shadow-lg"
+                    : ""
                 }`}
               >
                 <span className="relative z-10">
-                  {submitStatus === 'loading' && (
-                    <svg className="w-5 h-5 animate-spin inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  {submitStatus === "loading" && (
+                    <svg
+                      className="w-5 h-5 animate-spin inline-block mr-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                      />
                     </svg>
                   )}
-                  {submitStatus === 'success' && (
-                    <svg className="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  {submitStatus === "success" && (
+                    <svg
+                      className="w-5 h-5 inline-block mr-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M5 13l4 4L19 7"
+                      />
                     </svg>
                   )}
-                  {submitStatus === 'loading' 
-                    ? 'Creating Account...' 
-                    : submitStatus === 'success' 
-                      ? 'Account Created Successfully!' 
-                      : 'Create Account'
-                  }
+                  {submitStatus === "loading"
+                    ? "Creating Account..."
+                    : submitStatus === "success"
+                    ? "Account Created Successfully!"
+                    : "Create Account"}
                 </span>
               </button>
+            </div>
+            {/* Divider */}
+            <div className="relative my-8">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-700"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-4 bg-gray-900/70 text-gray-400">
+                  Already have an account?
+                </span>
+              </div>
+            </div>
+            {/* Login Link */}
+            <div className="text-center">
+              <Link
+                to={"/login"}
+                className="text-indigo-400 hover:text-indigo-300 transition-colors font-medium text-lg"
+              >
+                Sign in to your account →
+              </Link>
             </div>
           </form>
         </div>
