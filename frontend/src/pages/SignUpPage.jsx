@@ -32,6 +32,7 @@ const SignUpPage = () => {
     
     try {
       const result = await signup({ username, email, password, role });
+      
       if (result && result.success !== false) {
         setSubmitStatus("success");
       } else {
@@ -39,7 +40,7 @@ const SignUpPage = () => {
       }
     } catch (error) {
       setSubmitStatus("idle");
-      console.log(error)
+      console.log(error.message)
     } finally {
       setIsSubmitting(false);
     }

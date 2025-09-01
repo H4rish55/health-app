@@ -5,6 +5,7 @@ import axios from 'axios'
 export const useAuthStore = create((set) => ({
 	user: null,
     isSigningUp: false,
+    isLogginIn: false,
     signup: async (credentials) => {
         set({isSigningUp: true})
         try {
@@ -17,7 +18,17 @@ export const useAuthStore = create((set) => ({
         }
     },
 
-    login: async () => {},
+    login: async (credentials) => {
+        set({isLogginIn: true})
+        try {
+            const response = await axios.post("/api/v1/auth/login", credentials)
+            set({ user: response.data.user, isLogginIn: false })
+            toast.success("Logged In successfully")
+        } catch (error) {
+            toast.error(error.response.data.message || "Login Failed")
+            set({ isLogginIn: false, user: null })
+        }
+    },
 
     logout: async () => {},
 
