@@ -1,42 +1,48 @@
 import React, { useState } from "react";
 import EyeIcon from "../components/EyeIcon";
 import { Link } from "react-router-dom";
+import { useAuthStore } from "../store/authUser";
 
 const SignUpPage = () => {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-    role: "",
-  });
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
+
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState("idle"); // idle, loading, success
 
-  const selectRole = (role) => {
-    setFormData((prev) => ({ ...prev, role }));
-  };
+  const { signup } = useAuthStore();
 
   const togglePassword = () => {
     setShowPassword(!showPassword);
   };
 
   const isFormValid = () => {
-    return (
-      formData.username.trim() &&
-      formData.email.trim() &&
-      formData.password &&
-      formData.role &&
-      formData.terms
-    );
+    return email && username && password && role;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!isFormValid()) return;
 
     setIsSubmitting(true);
     setSubmitStatus("loading");
+    
+    try {
+      const result = await signup({ username, email, password, role });
+      if (result && result.success !== false) {
+        setSubmitStatus("success");
+      } else {
+        setSubmitStatus("idle");
+      }
+    } catch (error) {
+      setSubmitStatus("idle");
+      console.log(error)
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -77,16 +83,22 @@ const SignUpPage = () => {
               </span>
             </h1>
             <p className="text-lg text-gray-400 max-w-md mx-auto leading-relaxed">
-              Intelligent healthcare solutions powered by data
+              Create your account and start your health journey
             </p>
           </div>
 
           {/* Signup Form */}
-          <form className="bg-gray-900/70 backdrop-blur-xl border border-white/10 rounded-3xl p-8 lg:p-10 shadow-2xl">
+          <form
+            className="bg-gray-900/70 backdrop-blur-xl border border-white/10 rounded-3xl p-8 lg:p-10 shadow-2xl"
+            onSubmit={handleSubmit}
+          >
             <div className="space-y-6">
               {/* Username Input */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-300 flex items-center gap-2">
+                <label
+                  htmlFor="username"
+                  className="text-sm font-medium text-gray-300 flex items-center gap-2"
+                >
                   <svg
                     className="w-4 h-4"
                     fill="none"
@@ -107,12 +119,18 @@ const SignUpPage = () => {
                   name="username"
                   className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 outline-none text-lg transition-all duration-300 focus:bg-white/8 focus:border-indigo-500 focus:shadow-lg focus:shadow-indigo-500/10 focus:-translate-y-0.5"
                   placeholder="Enter your username"
+                  id="username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
               </div>
 
               {/* Email Input */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-300 flex items-center gap-2">
+                <label
+                  htmlFor="email"
+                  className="text-sm font-medium text-gray-300 flex items-center gap-2"
+                >
                   <svg
                     className="w-4 h-4"
                     fill="none"
@@ -133,12 +151,18 @@ const SignUpPage = () => {
                   name="email"
                   className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 outline-none text-lg transition-all duration-300 focus:bg-white/8 focus:border-indigo-500 focus:shadow-lg focus:shadow-indigo-500/10 focus:-translate-y-0.5"
                   placeholder="Enter your email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
 
               {/* Password Input */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-300 flex items-center gap-2">
+                <label
+                  htmlFor="password"
+                  className="text-sm font-medium text-gray-300 flex items-center gap-2"
+                >
                   {/* lock icon ... */}
                   Password
                 </label>
@@ -149,6 +173,9 @@ const SignUpPage = () => {
                     name="password"
                     className="w-full px-4 py-3 pr-12 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 outline-none text-lg transition-all duration-300 focus:bg-white/8 focus:border-indigo-500 focus:shadow-lg focus:shadow-indigo-500/10 focus:-translate-y-0.5"
                     placeholder="Enter your password"
+                    id="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
 
                   <button
@@ -187,11 +214,11 @@ const SignUpPage = () => {
                   {/* Doctor Role */}
                   <div
                     className={`bg-white/3 border rounded-xl p-6 cursor-pointer text-center transition-all duration-300 hover:bg-white/5 hover:-translate-y-1 hover:border-white/20 ${
-                      formData.role === "doctor"
+                      role === "doctor"
                         ? "bg-gradient-to-br from-indigo-500/10 to-purple-500/10 border-indigo-500 scale-105"
                         : "border-white/10"
                     }`}
-                    onClick={() => selectRole("doctor")}
+                    onClick={() => setRole("doctor")}
                   >
                     <div className="w-12 h-12 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
                       <svg
@@ -219,11 +246,11 @@ const SignUpPage = () => {
                   {/* Patient Role */}
                   <div
                     className={`bg-white/3 border rounded-xl p-6 cursor-pointer text-center transition-all duration-300 hover:bg-white/5 hover:-translate-y-1 hover:border-white/20 ${
-                      formData.role === "patient"
+                      role === "patient"
                         ? "bg-gradient-to-br from-indigo-500/10 to-purple-500/10 border-indigo-500 scale-105"
                         : "border-white/10"
                     }`}
-                    onClick={() => selectRole("patient")}
+                    onClick={() => setRole("patient")}
                   >
                     <div className="w-12 h-12 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
                       <svg
