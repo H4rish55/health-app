@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import EyeIcon from "../components/EyeIcon";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store/authUser";
 
 const SignUpPage = () => {
@@ -12,6 +12,8 @@ const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState("idle"); // idle, loading, success
+
+  const navigate = useNavigate()
 
   const { signup } = useAuthStore();
 
@@ -34,6 +36,7 @@ const SignUpPage = () => {
       const result = await signup({ username, email, password, role });
       
       if (result && result.success !== false) {
+        navigate("/verify-email")
         setSubmitStatus("success");
       } else {
         setSubmitStatus("idle");

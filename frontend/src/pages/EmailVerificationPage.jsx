@@ -1,13 +1,16 @@
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuthStore } from "../store/authUser";
 
 const EmailVerificationPage = () => {
   const [code, setCode] = useState(["", "", "", "", "", ""]);
   const inputRefs = useRef([]);
-//   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState("idle");
+
+  const { verifyEmail } = useAuthStore()
 
   const isFormValid = () => {
     return code.every((digit) => digit !== "");
@@ -62,9 +65,23 @@ const EmailVerificationPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     if(!isFormValid) return
+    const verificationCode = code.join("")
 
-    setIsSubmitting(true)
-    setSubmitStatus("loading")
+    try {
+        const result = await verifyEmail(verificationCode)
+
+        if(result && result.success !== false){
+            navigate('/')
+            setSubmitStatus("success")
+        } else {
+            setSubmitStatus("idle")
+        }
+    } catch (error) {
+        setSubmitStatus("idle")
+        console.log(error.message)
+    } finally {
+        setIsSubmitting(false)
+    }
   }
 
   return (

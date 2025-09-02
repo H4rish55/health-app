@@ -41,7 +41,7 @@ const VitalIQLogin = () => {
       setSubmitStatus("idle")
       console.log(error.message)
     } finally {
-      setSubmitStatus(false)
+      setIsSubmitting(false)
     }
 
   };
