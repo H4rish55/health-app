@@ -264,6 +264,15 @@ const resetPassword = async (req, res) => {
   }
 };
 
+const checkAuth = async (req, res) => {
+  try {
+    res.status(200).json({ success: true, user: req.user });
+  } catch (error) {
+    console.log("Error in auth check controller:", error.message);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+};
+
 module.exports = {
   signup,
   login,
@@ -271,4 +280,5 @@ module.exports = {
   verifyEmail,
   forgotPassword,
   resetPassword,
+  checkAuth,
 };

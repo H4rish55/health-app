@@ -7,6 +7,8 @@ export const useAuthStore = create((set) => ({
     isSigningUp: false,
     isLogginIn: false,
     isLogginOut: false,
+    isVerifyingEmail: false,
+    isCheckingAuth: false,
     signup: async (credentials) => {
         set({isSigningUp: true})
         try {
@@ -34,7 +36,7 @@ export const useAuthStore = create((set) => ({
     logout: async () => {
         set({ isLogginOut: true })
         try {
-            await axios.post("api/v1/auth/logout")
+            await axios.post("/api/v1/auth/logout")
             set({ user: null, isLogginOut: false })
             toast.success("Logged out successfully")
         } catch (error) {
@@ -42,5 +44,27 @@ export const useAuthStore = create((set) => ({
         }
     },
 
-    authCheck: async () => {},
+    authCheck: async () => {
+        set({isCheckingAuth: true})
+        try {
+            const response = await axios.get('/api/v1/auth/auth-check')
+            set({ user: response.data.user, isCheckingAuth: false })
+        } catch (error) {
+            set({ isCheckingAuth: false, user: null })
+            throw error
+        }
+    },
+
+    verifyEmail: async (code) => {
+        set({isVerifyingEmail: true})
+        try {
+            const response = await axios.post("/api/v1/auth/verify-email", { code })
+            set({ user: response.data.user, isVerifyingEmail: false })
+            toast.success("Email verification successfull")
+            return response.data
+        } catch (error) {
+            toast.error(error.response.data.message || "Verification failed")
+            set({ isVerifyingEmail: false, user: null })
+        }
+    }
 }))

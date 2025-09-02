@@ -246,12 +246,12 @@ const VitalIQLogin = () => {
 
               {/* Forgot Password Link */}
               <div className="text-right">
-                <a
-                  href="#"
+                <Link
+                  to={'/forgot-password'}
                   className="text-sm text-indigo-400 hover:text-indigo-300 transition-colors"
                 >
                   Forgot your password?
-                </a>
+                </Link>
               </div>
 
               {/* Submit Button */}

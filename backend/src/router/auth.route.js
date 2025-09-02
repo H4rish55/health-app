@@ -1,6 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const { signup, login, logout, verifyEmail, forgotPassword, resetPassword } = require('../controller/auth.controller')
+const { signup, login, logout, verifyEmail, forgotPassword, resetPassword, checkAuth } = require('../controller/auth.controller')
+const protectRoute = require('../middleware/protectRoute')
+
+router.get('/auth-check', protectRoute, checkAuth)
 
 router.post('/signup', signup)
 router.post('/login', login)
