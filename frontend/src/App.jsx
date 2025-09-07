@@ -22,6 +22,9 @@ const ProtectedRoute = ({ children }) => {
     return <Navigate to={"/verify-email"} replace />;
   }
 
+  console.log(isAuthenticated)
+  console.log(user)
+
   return children;
 };
 

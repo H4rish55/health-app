@@ -266,6 +266,12 @@ const resetPassword = async (req, res) => {
 
 const checkAuth = async (req, res) => {
   try {
+    const user = await User.findById(req.user).select("-password")
+
+    if(!user){
+      res.status(400).json({ success: false, message: "User Not Found" })
+    }
+
     res.status(200).json({ success: true, user: req.user });
   } catch (error) {
     console.log("Error in auth check controller:", error.message);
