@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import HomePage from "./pages/HomePage";
+import HomePage from "./pages/home/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import { Toaster } from "react-hot-toast";
@@ -15,7 +15,7 @@ const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, user } = useAuthStore();
 
   if (!isAuthenticated) {
-    return <Navigate to={"/login"} replace />;
+    return <Navigate to={"/"} replace />;
   }
 
   if (!user.isVerified) {
@@ -54,9 +54,7 @@ function App() {
         <Route
           path="/"
           element={
-            <ProtectedRoute>
               <HomePage />
-            </ProtectedRoute>
           }
         />
 

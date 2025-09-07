@@ -247,11 +247,11 @@ const SignUpPage = () => {
                   {/* Patient Role */}
                   <div
                     className={`bg-white/3 border rounded-xl p-6 cursor-pointer text-center transition-all duration-300 hover:bg-white/5 hover:-translate-y-1 hover:border-white/20 ${
-                      role === "patient"
+                      role === "user"
                         ? "bg-gradient-to-br from-indigo-500/10 to-purple-500/10 border-indigo-500 scale-105"
                         : "border-white/10"
                     }`}
-                    onClick={() => setRole("patient")}
+                    onClick={() => setRole("user")}
                   >
                     <div className="w-12 h-12 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
                       <svg
