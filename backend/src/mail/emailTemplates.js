@@ -989,11 +989,11 @@ const PASSWORD_RESET_REQUEST_TEMPLATE = `
                     Click the button below to create a new secure password for your account. You'll be redirected to a secure page where you can set your new password.
                 </div>
                 
-                <a href="{resetURL}" class="reset-button">Reset Password</a>
+                <a href="%%resetURL%%" class="reset-button">Reset Password</a>
                 
                 <div class="alternative-text">
                     If the button doesn't work, copy and paste this link into your browser:<br>
-                    <span class="link-fallback">{resetURL}</span>
+                    <span class="link-fallback">%%resetURL%%</span>
                 </div>
             </div>
             

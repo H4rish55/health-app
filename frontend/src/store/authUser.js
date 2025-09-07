@@ -13,12 +13,14 @@ export const useAuthStore = create((set) => ({
     isForgotPassword: false,
     isResetPassword: false,
     message: null,
+    error: null,
     signup: async (credentials) => {
         set({isSigningUp: true})
         try {
             const response = await axios.post("/api/v1/auth/signup", credentials)
             set({ user: response.data.user, isAuthenticated: true, isSigningUp: false })
             toast.success("Account created successfully")
+            return { ok: true }
         } catch (error) {
             toast.error(error.response.data.message || "SignUp failed")
             set({ isSigningUp: false, user: null })
@@ -84,12 +86,12 @@ export const useAuthStore = create((set) => ({
     },
 
     resetPassword: async (token, password) => {
-        set({ isResetPassword: true })
+        set({ isResetPassword: true, error: null })
         try {
             const response = await axios.post(`/api/v1/auth/reset-password/${token}`, { password })
             set({ message: response.data.message, isResetPassword: false })
         } catch (error) {
-            set({ isResetPassword: false })
+            set({ isResetPassword: false, error: error.response.data.message })
             toast.error(error.response.data.message || "Error in reseting password")
         }
     }

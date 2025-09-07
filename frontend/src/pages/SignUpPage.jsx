@@ -33,12 +33,14 @@ const SignUpPage = () => {
     setSubmitStatus("loading");
     
     try {
-      await signup({ username, email, password, role });
-      setSubmitStatus("success");
-      navigate("/verify-email");
+      const res = await signup({ username, email, password, role });
+      if(res?.ok){
+        setSubmitStatus("success");
+        navigate("/verify-email");
+      }
     } catch (error) {
       setSubmitStatus("idle");
-      console.log(error.message)
+      console.log(error.message);
     } finally {
       setIsSubmitting(false);
     }
