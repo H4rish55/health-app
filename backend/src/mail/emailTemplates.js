@@ -14,7 +14,7 @@ const VERIFICATION_EMAIL_TEMPLATE = `
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            background: linear-gradient(135deg, #030712 0%, #0f172a 50%, #1e293b 100%);
             color: #ffffff;
             line-height: 1.6;
             min-height: 100vh;
@@ -24,15 +24,16 @@ const VERIFICATION_EMAIL_TEMPLATE = `
         .email-container {
             max-width: 600px;
             margin: 0 auto;
-            background: linear-gradient(145deg, #1e1e2e, #252545);
-            border-radius: 20px;
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(16px);
+            border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            border: 1px solid #333366;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
             padding: 40px 30px;
             text-align: center;
             position: relative;
@@ -79,22 +80,23 @@ const VERIFICATION_EMAIL_TEMPLATE = `
         .greeting {
             font-size: 1.2rem;
             margin-bottom: 25px;
-            color: #e8e8f0;
+            color: #f9fafb;
         }
 
         .description {
             font-size: 1rem;
             margin-bottom: 35px;
-            color: #b8b8c8;
+            color: #d1d5db;
             line-height: 1.7;
         }
 
         .verification-section {
-            background: linear-gradient(145deg, #2a2a4a, #1f1f3a);
-            border-radius: 15px;
+            background: rgba(31, 41, 55, 0.5);
+            backdrop-filter: blur(16px);
+            border-radius: 20px;
             padding: 35px;
             text-align: center;
-            border: 1px solid #404070;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             margin: 30px 0;
             position: relative;
             overflow: hidden;
@@ -118,7 +120,7 @@ const VERIFICATION_EMAIL_TEMPLATE = `
 
         .verification-label {
             font-size: 1.1rem;
-            color: #e8e8f0;
+            color: #f9fafb;
             margin-bottom: 20px;
             font-weight: 600;
         }
@@ -128,81 +130,81 @@ const VERIFICATION_EMAIL_TEMPLATE = `
             font-weight: 700;
             letter-spacing: 8px;
             color: #ffffff;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #6366f1, #a855f7);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin: 20px 0;
-            text-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+            text-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
             position: relative;
             z-index: 2;
         }
 
         .code-placeholder {
-            background: linear-gradient(145deg, #1a1a2e, #252545);
-            border: 2px dashed #667eea;
-            border-radius: 10px;
+            background: rgba(31, 41, 55, 0.8);
+            border: 2px dashed #6366f1;
+            border-radius: 12px;
             padding: 20px;
             margin: 20px 0;
             font-size: 2rem;
             font-weight: 700;
             letter-spacing: 6px;
-            color: #667eea;
+            color: #6366f1;
         }
 
         .warning-text {
             font-size: 0.95rem;
-            color: #ff9f43;
+            color: #fbbf24;
             margin: 25px 0;
             padding: 15px;
-            background: rgba(255, 159, 67, 0.1);
-            border-radius: 8px;
-            border-left: 4px solid #ff9f43;
+            background: rgba(251, 191, 36, 0.1);
+            border-radius: 12px;
+            border-left: 4px solid #fbbf24;
         }
 
         .instructions {
             font-size: 1rem;
-            color: #b8b8c8;
+            color: #d1d5db;
             margin: 25px 0;
             line-height: 1.6;
         }
 
         .cta-button {
             display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
             color: white;
             text-decoration: none;
             padding: 15px 35px;
-            border-radius: 25px;
+            border-radius: 12px;
             font-weight: 600;
             font-size: 1rem;
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.25);
             margin-top: 20px;
         }
 
         .cta-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 12px 35px rgba(99, 102, 241, 0.4);
         }
 
         .divider {
             height: 1px;
-            background: linear-gradient(90deg, transparent, #333366, transparent);
+            background: linear-gradient(90deg, transparent, rgba(75, 85, 99, 0.5), transparent);
             margin: 30px 0;
         }
 
         .footer {
-            background: #0f0f1f;
+            background: rgba(3, 7, 18, 0.8);
             padding: 30px;
             text-align: center;
-            border-top: 1px solid #333366;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .footer-text {
-            color: #888;
+            color: #9ca3af;
             font-size: 0.85rem;
             line-height: 1.5;
         }
@@ -210,25 +212,27 @@ const VERIFICATION_EMAIL_TEMPLATE = `
         .signature {
             margin: 25px 0;
             padding: 20px;
-            background: linear-gradient(145deg, #1a1a2e, #252545);
-            border-radius: 10px;
-            border-left: 3px solid #667eea;
+            background: rgba(31, 41, 55, 0.5);
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            border-left: 3px solid #6366f1;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .signature-text {
-            color: #e8e8f0;
+            color: #f9fafb;
             font-size: 1rem;
         }
 
         .team-name {
-            color: #667eea;
+            color: #6366f1;
             font-weight: 600;
         }
 
         @media (max-width: 480px) {
             .email-container {
                 margin: 10px;
-                border-radius: 15px;
+                border-radius: 20px;
             }
             
             .header {
@@ -273,10 +277,10 @@ const VERIFICATION_EMAIL_TEMPLATE = `
             <div class="verification-section">
                 <div class="verification-label">Your Verification Code</div>
                 <!-- Use this version when you have the actual code -->
-                <!-- <div class="verification-code">{verificationCode}</div> -->
+                <!-- <div class="verification-code">%%VERIFICATION_CODE%%</div> -->
                 
                 <!-- Placeholder version for demo -->
-                <div class="code-placeholder">{verificationCode}</div>
+                <div class="code-placeholder">%%VERIFICATION_CODE%%</div>
                 
                 <div class="instructions">
                     Enter this code on the verification page to activate your account and start your health journey with our AI-powered predictions.
@@ -330,7 +334,7 @@ const PASSWORD_RESET_SUCCESS_TEMPLATE = `
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            background: linear-gradient(135deg, #030712 0%, #0f172a 50%, #1e293b 100%);
             color: #ffffff;
             line-height: 1.6;
             min-height: 100vh;
@@ -340,15 +344,16 @@ const PASSWORD_RESET_SUCCESS_TEMPLATE = `
         .email-container {
             max-width: 600px;
             margin: 0 auto;
-            background: linear-gradient(145deg, #1e1e2e, #252545);
-            border-radius: 20px;
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(16px);
+            border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            border: 1px solid #333366;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
             padding: 40px 30px;
             text-align: center;
             position: relative;
@@ -395,22 +400,23 @@ const PASSWORD_RESET_SUCCESS_TEMPLATE = `
         .greeting {
             font-size: 1.2rem;
             margin-bottom: 25px;
-            color: #e8e8f0;
+            color: #f9fafb;
         }
 
         .description {
             font-size: 1rem;
             margin-bottom: 25px;
-            color: #b8b8c8;
+            color: #d1d5db;
             line-height: 1.7;
         }
 
         .success-section {
-            background: linear-gradient(145deg, #2a2a4a, #1f1f3a);
-            border-radius: 15px;
+            background: rgba(31, 41, 55, 0.5);
+            backdrop-filter: blur(16px);
+            border-radius: 20px;
             padding: 40px;
             text-align: center;
-            border: 1px solid #404070;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             margin: 30px 0;
             position: relative;
             overflow: hidden;
@@ -423,7 +429,7 @@ const PASSWORD_RESET_SUCCESS_TEMPLATE = `
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.05), transparent);
+            background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.05), transparent);
             animation: shimmer 3s infinite;
         }
 
@@ -435,7 +441,7 @@ const PASSWORD_RESET_SUCCESS_TEMPLATE = `
         .success-icon {
             width: 80px;
             height: 80px;
-            background: linear-gradient(135deg, #4caf50, #45a049);
+            background: linear-gradient(135deg, #22c55e, #16a34a);
             border-radius: 50%;
             display: inline-flex;
             align-items: center;
@@ -443,7 +449,7 @@ const PASSWORD_RESET_SUCCESS_TEMPLATE = `
             font-size: 2.5rem;
             color: white;
             margin-bottom: 20px;
-            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.3);
+            box-shadow: 0 10px 25px rgba(34, 197, 94, 0.3);
             position: relative;
             z-index: 2;
             animation: successPulse 2s infinite;
@@ -457,49 +463,50 @@ const PASSWORD_RESET_SUCCESS_TEMPLATE = `
 
         .success-title {
             font-size: 1.4rem;
-            color: #4caf50;
+            color: #22c55e;
             margin-bottom: 15px;
             font-weight: 600;
         }
 
         .success-description {
             font-size: 1rem;
-            color: #e8e8f0;
+            color: #f9fafb;
             margin-bottom: 20px;
             line-height: 1.6;
         }
 
         .warning-section {
-            background: rgba(255, 159, 67, 0.1);
-            border-left: 4px solid #ff9f43;
-            border-radius: 8px;
+            background: rgba(251, 191, 36, 0.1);
+            border-left: 4px solid #fbbf24;
+            border-radius: 12px;
             padding: 20px;
             margin: 25px 0;
         }
 
         .warning-title {
-            color: #ff9f43;
+            color: #fbbf24;
             font-weight: 600;
             font-size: 1.1rem;
             margin-bottom: 10px;
         }
 
         .warning-text {
-            color: #b8b8c8;
+            color: #d1d5db;
             font-size: 0.95rem;
             line-height: 1.6;
         }
 
         .security-tips {
-            background: linear-gradient(145deg, #1a1a2e, #252545);
-            border-radius: 12px;
+            background: rgba(31, 41, 55, 0.5);
+            backdrop-filter: blur(8px);
+            border-radius: 16px;
             padding: 25px;
             margin: 30px 0;
-            border: 1px solid #333366;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .security-title {
-            color: #667eea;
+            color: #6366f1;
             font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 20px;
@@ -518,7 +525,7 @@ const PASSWORD_RESET_SUCCESS_TEMPLATE = `
             align-items: flex-start;
             gap: 12px;
             margin-bottom: 15px;
-            color: #b8b8c8;
+            color: #d1d5db;
             font-size: 0.95rem;
             line-height: 1.6;
         }
@@ -531,40 +538,40 @@ const PASSWORD_RESET_SUCCESS_TEMPLATE = `
 
         .cta-button {
             display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
             color: white;
             text-decoration: none;
             padding: 15px 35px;
-            border-radius: 25px;
+            border-radius: 12px;
             font-weight: 600;
             font-size: 1rem;
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.25);
             margin: 20px 0;
         }
 
         .cta-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 12px 35px rgba(99, 102, 241, 0.4);
         }
 
         .divider {
             height: 1px;
-            background: linear-gradient(90deg, transparent, #333366, transparent);
+            background: linear-gradient(90deg, transparent, rgba(75, 85, 99, 0.5), transparent);
             margin: 30px 0;
         }
 
         .footer {
-            background: #0f0f1f;
+            background: rgba(3, 7, 18, 0.8);
             padding: 30px;
             text-align: center;
-            border-top: 1px solid #333366;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .footer-text {
-            color: #888;
+            color: #9ca3af;
             font-size: 0.85rem;
             line-height: 1.5;
         }
@@ -572,25 +579,27 @@ const PASSWORD_RESET_SUCCESS_TEMPLATE = `
         .signature {
             margin: 25px 0;
             padding: 20px;
-            background: linear-gradient(145deg, #1a1a2e, #252545);
-            border-radius: 10px;
-            border-left: 3px solid #4caf50;
+            background: rgba(31, 41, 55, 0.5);
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            border-left: 3px solid #22c55e;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .signature-text {
-            color: #e8e8f0;
+            color: #f9fafb;
             font-size: 1rem;
         }
 
         .team-name {
-            color: #4caf50;
+            color: #22c55e;
             font-weight: 600;
         }
 
         @media (max-width: 480px) {
             .email-container {
                 margin: 10px;
-                border-radius: 15px;
+                border-radius: 20px;
             }
             
             .header {
@@ -703,7 +712,7 @@ const PASSWORD_RESET_REQUEST_TEMPLATE = `
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            background: linear-gradient(135deg, #030712 0%, #0f172a 50%, #1e293b 100%);
             color: #ffffff;
             line-height: 1.6;
             min-height: 100vh;
@@ -713,15 +722,16 @@ const PASSWORD_RESET_REQUEST_TEMPLATE = `
         .email-container {
             max-width: 600px;
             margin: 0 auto;
-            background: linear-gradient(145deg, #1e1e2e, #252545);
-            border-radius: 20px;
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(16px);
+            border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            border: 1px solid #333366;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
             padding: 40px 30px;
             text-align: center;
             position: relative;
@@ -768,32 +778,33 @@ const PASSWORD_RESET_REQUEST_TEMPLATE = `
         .greeting {
             font-size: 1.2rem;
             margin-bottom: 25px;
-            color: #e8e8f0;
+            color: #f9fafb;
         }
 
         .description {
             font-size: 1rem;
             margin-bottom: 25px;
-            color: #b8b8c8;
+            color: #d1d5db;
             line-height: 1.7;
         }
 
         .security-notice {
             font-size: 0.95rem;
-            color: #ff9f43;
+            color: #fbbf24;
             margin: 25px 0;
             padding: 15px;
-            background: rgba(255, 159, 67, 0.1);
-            border-radius: 8px;
-            border-left: 4px solid #ff9f43;
+            background: rgba(251, 191, 36, 0.1);
+            border-radius: 12px;
+            border-left: 4px solid #fbbf24;
         }
 
         .reset-section {
-            background: linear-gradient(145deg, #2a2a4a, #1f1f3a);
-            border-radius: 15px;
+            background: rgba(31, 41, 55, 0.5);
+            backdrop-filter: blur(16px);
+            border-radius: 20px;
             padding: 35px;
             text-align: center;
-            border: 1px solid #404070;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             margin: 30px 0;
             position: relative;
             overflow: hidden;
@@ -818,7 +829,7 @@ const PASSWORD_RESET_REQUEST_TEMPLATE = `
         .reset-icon {
             font-size: 3rem;
             margin-bottom: 20px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #6366f1, #a855f7);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -826,66 +837,66 @@ const PASSWORD_RESET_REQUEST_TEMPLATE = `
 
         .reset-title {
             font-size: 1.3rem;
-            color: #e8e8f0;
+            color: #f9fafb;
             margin-bottom: 15px;
             font-weight: 600;
         }
 
         .reset-description {
             font-size: 1rem;
-            color: #b8b8c8;
+            color: #d1d5db;
             margin-bottom: 25px;
             line-height: 1.6;
         }
 
         .reset-button {
             display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
             color: white;
             text-decoration: none;
             padding: 15px 40px;
-            border-radius: 30px;
+            border-radius: 12px;
             font-weight: 600;
             font-size: 1.1rem;
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.25);
             position: relative;
             z-index: 2;
         }
 
         .reset-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 12px 35px rgba(99, 102, 241, 0.4);
         }
 
         .expiry-warning {
             font-size: 0.9rem;
-            color: #ff6b6b;
+            color: #ef4444;
             margin: 25px 0;
             padding: 12px;
-            background: rgba(255, 107, 107, 0.1);
-            border-radius: 8px;
-            border-left: 4px solid #ff6b6b;
+            background: rgba(239, 68, 68, 0.1);
+            border-radius: 12px;
+            border-left: 4px solid #ef4444;
             text-align: center;
         }
 
         .divider {
             height: 1px;
-            background: linear-gradient(90deg, transparent, #333366, transparent);
+            background: linear-gradient(90deg, transparent, rgba(75, 85, 99, 0.5), transparent);
             margin: 30px 0;
         }
 
         .footer {
-            background: #0f0f1f;
+            background: rgba(3, 7, 18, 0.8);
             padding: 30px;
             text-align: center;
-            border-top: 1px solid #333366;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .footer-text {
-            color: #888;
+            color: #9ca3af;
             font-size: 0.85rem;
             line-height: 1.5;
         }
@@ -893,41 +904,43 @@ const PASSWORD_RESET_REQUEST_TEMPLATE = `
         .signature {
             margin: 25px 0;
             padding: 20px;
-            background: linear-gradient(145deg, #1a1a2e, #252545);
-            border-radius: 10px;
-            border-left: 3px solid #667eea;
+            background: rgba(31, 41, 55, 0.5);
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            border-left: 3px solid #6366f1;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .signature-text {
-            color: #e8e8f0;
+            color: #f9fafb;
             font-size: 1rem;
         }
 
         .team-name {
-            color: #667eea;
+            color: #6366f1;
             font-weight: 600;
         }
 
         .alternative-text {
             font-size: 0.9rem;
-            color: #a8a8b8;
+            color: #d1d5db;
             margin-top: 20px;
             padding: 15px;
-            background: rgba(168, 168, 184, 0.05);
-            border-radius: 8px;
+            background: rgba(209, 213, 219, 0.05);
+            border-radius: 12px;
             line-height: 1.5;
         }
 
         .link-fallback {
             word-break: break-all;
-            color: #667eea;
+            color: #6366f1;
             text-decoration: underline;
         }
 
         @media (max-width: 480px) {
             .email-container {
                 margin: 10px;
-                border-radius: 15px;
+                border-radius: 20px;
             }
             
             .header {
@@ -1033,7 +1046,7 @@ const WELCOME_EMAIL_TEMPLATE = `
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            background: linear-gradient(135deg, #030712 0%, #0f172a 50%, #1e293b 100%);
             color: #ffffff;
             line-height: 1.6;
             min-height: 100vh;
@@ -1043,15 +1056,16 @@ const WELCOME_EMAIL_TEMPLATE = `
         .email-container {
             max-width: 600px;
             margin: 0 auto;
-            background: linear-gradient(145deg, #1e1e2e, #252545);
-            border-radius: 20px;
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(16px);
+            border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            border: 1px solid #333366;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
             padding: 40px 30px;
             text-align: center;
             position: relative;
@@ -1097,14 +1111,14 @@ const WELCOME_EMAIL_TEMPLATE = `
         .welcome-text {
             font-size: 1.3rem;
             margin-bottom: 30px;
-            color: #e8e8f0;
+            color: #f9fafb;
             text-align: center;
         }
 
         .description {
             font-size: 1rem;
             margin-bottom: 40px;
-            color: #b8b8c8;
+            color: #d1d5db;
             text-align: center;
             line-height: 1.7;
         }
@@ -1117,11 +1131,12 @@ const WELCOME_EMAIL_TEMPLATE = `
         }
 
         .feature-card {
-            background: linear-gradient(145deg, #2a2a4a, #1f1f3a);
-            border-radius: 15px;
+            background: rgba(31, 41, 55, 0.5);
+            backdrop-filter: blur(8px);
+            border-radius: 16px;
             padding: 25px 20px;
             text-align: center;
-            border: 1px solid #404070;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -1144,14 +1159,14 @@ const WELCOME_EMAIL_TEMPLATE = `
 
         .feature-card:hover {
             transform: translateY(-5px);
-            border-color: #667eea;
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
+            border-color: #6366f1;
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.2);
         }
 
         .feature-icon {
             font-size: 2.5rem;
             margin-bottom: 15px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #6366f1, #a855f7);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -1166,73 +1181,74 @@ const WELCOME_EMAIL_TEMPLATE = `
 
         .feature-desc {
             font-size: 0.85rem;
-            color: #a8a8b8;
+            color: #d1d5db;
             line-height: 1.4;
         }
 
         .cta-section {
             text-align: center;
             padding: 30px;
-            background: linear-gradient(145deg, #1a1a2e, #252545);
-            border-radius: 15px;
+            background: rgba(31, 41, 55, 0.5);
+            backdrop-filter: blur(8px);
+            border-radius: 16px;
             margin-bottom: 30px;
-            border: 1px solid #333366;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .cta-button {
             display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
             color: white;
             text-decoration: none;
             padding: 15px 40px;
-            border-radius: 30px;
+            border-radius: 12px;
             font-weight: 600;
             font-size: 1.1rem;
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.25);
         }
 
         .cta-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 12px 35px rgba(99, 102, 241, 0.4);
         }
 
         .footer {
-            background: #0f0f1f;
+            background: rgba(3, 7, 18, 0.8);
             padding: 30px;
             text-align: center;
-            border-top: 1px solid #333366;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .footer-text {
-            color: #888;
+            color: #9ca3af;
             font-size: 0.9rem;
             margin-bottom: 15px;
         }
 
         .unsubscribe-link {
-            color: #667eea;
+            color: #6366f1;
             text-decoration: none;
             font-size: 0.85rem;
             transition: color 0.3s ease;
         }
 
         .unsubscribe-link:hover {
-            color: #8fa2ff;
+            color: #8b5cf6;
         }
 
         .divider {
             height: 1px;
-            background: linear-gradient(90deg, transparent, #333366, transparent);
+            background: linear-gradient(90deg, transparent, rgba(75, 85, 99, 0.5), transparent);
             margin: 30px 0;
         }
 
         @media (max-width: 480px) {
             .email-container {
                 margin: 10px;
-                border-radius: 15px;
+                border-radius: 20px;
             }
             
             .header {
@@ -1294,7 +1310,7 @@ const WELCOME_EMAIL_TEMPLATE = `
             
             <div class="cta-section">
                 <h3 style="margin-bottom: 15px; color: #ffffff;">Ready to start your health journey?</h3>
-                <p style="margin-bottom: 25px; color: #b8b8c8;">Get your first AI health assessment and discover what your data reveals about your health.</p>
+                <p style="margin-bottom: 25px; color: #d1d5db;">Get your first AI health assessment and discover what your data reveals about your health.</p>
                 <a href="#" class="cta-button">Start Health Assessment</a>
             </div>
         </div>

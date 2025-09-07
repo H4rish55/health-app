@@ -11,6 +11,8 @@ const ENV_VARS = {
     MAIL_ENDPOINT: process.env.MAIL_ENDPOINT,
     OPENAI_API: process.env.OPENAI_API,
     SYSTEM_PROMPT: process.env.SYSTEM_PROMPT,
+    GOOGLE_MAIL: process.env.GOOGLE_MAIL,
+    GMAIL_USERNAME: process.env.GMAIL_USERNAME
 }
 
 module.exports = ENV_VARS

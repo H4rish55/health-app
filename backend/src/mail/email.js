@@ -4,20 +4,26 @@ const {
   PASSWORD_RESET_REQUEST_TEMPLATE,
   PASSWORD_RESET_SUCCESS_TEMPLATE,
 } = require("./emailTemplates");
-const { client, sender } = require("./mail.config");
+const { transporter, sender } = require('./mail.config')
+
+const sendMail = async ({ to, subject, html, text }) => {
+  return await transporter.sendMail({
+    from: sender,
+    to,
+    subject,
+    text: text || html.replace(/<[^>]+>/g, "").slice(0, 1000),
+    html
+  });
+}
 
 const sendVerificationEmail = async (email, verificationToken) => {
-  const recipient = [{ email }];
 
   try {
-    const response = await client.send({
+    const response = await sendMail({
       from: sender,
-      to: recipient,
+      to: email,
       subject: "Verify your email",
-      html: VERIFICATION_EMAIL_TEMPLATE.replace(
-        "{verificationCode}",
-        verificationToken
-      ),
+      html: VERIFICATION_EMAIL_TEMPLATE.replaceAll("%%VERIFICATION_CODE%%", String(verificationToken)),
       category: "Email Verification",
     });
 
@@ -29,12 +35,11 @@ const sendVerificationEmail = async (email, verificationToken) => {
 };
 
 const sendWelcomeEmail = async (email, username) => {
-  const recipient = [{ email }];
 
   try {
-    const response = await client.send({
+    const response = await sendMail({
       from: sender,
-      to: recipient,
+      to: email,
       subject: "Welcome Email",
       html: WELCOME_EMAIL_TEMPLATE,
       category: "Welcome Email",
@@ -48,12 +53,11 @@ const sendWelcomeEmail = async (email, username) => {
 };
 
 const sendResetPasswordEmail = async (email, resetUrl) => {
-  const recipient = [{ email }];
 
   try {
-    const response = await client.send({
+    const response = await sendMail({
       from: sender,
-      to: recipient,
+      to: email,
       subject: "Reset password",
       html: PASSWORD_RESET_REQUEST_TEMPLATE.replace("{resetURL}", resetUrl),
       category: "Password reset",
@@ -67,12 +71,11 @@ const sendResetPasswordEmail = async (email, resetUrl) => {
 };
 
 const sendResetSuccessEmail = async (email) => {
-  const recipient = [{ email }];
 
   try {
-    const response = await client.send({
+    const response = await sendMail({
       from: sender,
-      to: recipient,
+      to: email,
       subject: "Reset password successfull",
       html: PASSWORD_RESET_SUCCESS_TEMPLATE,
       category: "Password reset success",

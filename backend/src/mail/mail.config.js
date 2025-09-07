@@ -1,15 +1,18 @@
-const { MailtrapClient } = require("mailtrap");
-const { MAIL_TOKEN } = require('../config/envVars')
+const nodemailer = require('nodemailer')
+const { GOOGLE_MAIL, GMAIL_USERNAME } = require('../config/envVars')
 
-const client = new MailtrapClient({ token: MAIL_TOKEN })
 
-const sender = {
-    email: 'info@demomailtrap.co',
-    name: 'harish'
-}
+const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: GMAIL_USERNAME,
+        pass: GOOGLE_MAIL
+    }
+})
+
+const sender = 'VitalIQ <info@vitaliq.one>'
 
 module.exports = {
-    client,
+    transporter,
     sender
 }
-
