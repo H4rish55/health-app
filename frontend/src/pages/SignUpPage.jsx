@@ -33,14 +33,9 @@ const SignUpPage = () => {
     setSubmitStatus("loading");
     
     try {
-      const result = await signup({ username, email, password, role });
-      
-      if (result && result.success !== false) {
-        navigate("/verify-email")
-        setSubmitStatus("success");
-      } else {
-        setSubmitStatus("idle");
-      }
+      await signup({ username, email, password, role });
+      setSubmitStatus("success");
+      navigate("/verify-email");
     } catch (error) {
       setSubmitStatus("idle");
       console.log(error.message)
@@ -283,8 +278,7 @@ const SignUpPage = () => {
 
               {/* Submit Button */}
               <button
-                type="button"
-                onClick={handleSubmit}
+                type="submit"
                 disabled={!isFormValid() || isSubmitting}
                 className={`w-full py-4 rounded-xl font-semibold text-lg shadow-lg transition-all duration-300 relative overflow-hidden ${
                   submitStatus === "success"

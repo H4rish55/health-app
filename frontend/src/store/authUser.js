@@ -11,6 +11,7 @@ export const useAuthStore = create((set) => ({
     isCheckingAuth: false,
     isAuthenticated: false,
     isForgotPassword: false,
+    isResetPassword: false,
     message: null,
     signup: async (credentials) => {
         set({isSigningUp: true})
@@ -79,6 +80,17 @@ export const useAuthStore = create((set) => ({
         } catch (error) {
             set({ isForgotPassword: false })
             toast.error(error.response.data.message || "Error sending reset password email")
+        }
+    },
+
+    resetPassword: async (token, password) => {
+        set({ isResetPassword: true })
+        try {
+            const response = await axios.post(`/api/v1/auth/reset-password/${token}`, { password })
+            set({ message: response.data.message, isResetPassword: false })
+        } catch (error) {
+            set({ isResetPassword: false })
+            toast.error(error.response.data.message || "Error in reseting password")
         }
     }
 }))
