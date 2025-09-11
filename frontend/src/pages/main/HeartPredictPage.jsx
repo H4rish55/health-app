@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { usePredictStore } from "../../store/predictStore";
 
 const HeartPredictPage = () => {
   const [age, setAge] = useState("");
@@ -13,219 +14,250 @@ const HeartPredictPage = () => {
   const [oldPeak, setOldPeak] = useState("");
   const [stSlope, setStSlope] = useState("");
 
+  const isFormValid = () => {
+    return (
+      age &&
+      sex &&
+      chestPainType &&
+      restingBp &&
+      cholesterol &&
+      fastingBs &&
+      restingEcg &&
+      maxHr &&
+      exerciseAngina &&
+      oldPeak &&
+      stSlope
+    );
+  };
+
+  const { heart } = usePredictStore();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!isFormValid()) return;
+
+    try {
+      const res = await heart({
+        age,
+        sex,
+        chestPainType,
+        restingBp,
+        cholesterol,
+        fastingBs,
+        restingEcg,
+        maxHr,
+        exerciseAngina,
+        oldPeak,
+        stSlope,
+      });
+
+      console.log(res)
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  handleSubmit()
+
   return (
-    <div>
-      <form>
-        <div>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 via-slate-900 to-gray-950 relative overflow-hidden p-6">
+      {/* Background Glow */}
+      <div
+        className="absolute inset-0 opacity-40"
+        style={{
+          background: `
+            radial-gradient(circle at 20% 30%, rgba(255,119,198,0.2), transparent 60%),
+            radial-gradient(circle at 80% 70%, rgba(120,219,226,0.2), transparent 60%)
+          `,
+        }}
+      />
+      <form className="relative z-10 max-w-3xl w-full bg-black/40 backdrop-blur-md rounded-2xl p-8 shadow-2xl">
+        <h2 className="text-2xl font-bold text-pink-400 mb-6 text-center animate-pulse">
+          Heart Disease Prediction
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Age */}
           <div>
-            {/* Age Input */}
-            <div>
-              <label htmlFor="age" className="">
-                <svg>
-                  <path />
-                </svg>
-                Age
-              </label>
-              <input
-                type="text"
-                name="age"
-                className=""
-                placeholder="Enter your age"
-                id="age"
-                value={age}
-                onChange={(e) => setAge(e.target.value)}
-              />
-            </div>
+            <label htmlFor="age" className="block text-gray-200 mb-1">
+              Age
+            </label>
+            <input
+              type="number"
+              id="age"
+              value={age}
+              onChange={(e) => setAge(e.target.value)}
+              placeholder="Enter your age"
+              className="w-full p-3 rounded-xl bg-gray-800 text-white focus:ring-2 focus:ring-pink-400 transition"
+            />
+          </div>
 
-            {/* Sex input */}
-            <div>
-              <label htmlFor="sex" className="">
-                <svg>
-                  <path />
-                </svg>
-                Sex
-              </label>
-              <input
-                type="text"
-                name="sex"
-                className=""
-                placeholder="Select your gender"
-                id="sex"
-                value={sex}
-                onChange={(e) => setSex(e.target.value)}
-              />
-            </div>
+          {/* Sex */}
+          <div>
+            <label htmlFor="sex" className="block text-gray-200 mb-1">
+              Sex
+            </label>
+            <select
+              id="sex"
+              value={sex}
+              onChange={(e) => setSex(e.target.value)}
+              className="w-full p-3 rounded-xl bg-gray-800 text-white focus:ring-2 focus:ring-pink-400 transition"
+            >
+              <option value="">Select Gender</option>
+              <option value="M">Male</option>
+              <option value="F">Female</option>
+            </select>
+          </div>
 
-            {/* Chest pain Input */}
-            <div>
-              <label htmlFor="chestPain" className="">
-                <svg>
-                  <path />
-                </svg>
-                Chest Pain Type
-              </label>
-              <input
-                type="text"
-                name="chestPain"
-                className=""
-                placeholder="Select your chest pain type"
-                id="chestPain"
-                value={chestPainType}
-                onChange={(e) => setChestPainType(e.target.value)}
-              />
-            </div>
+          {/* Chest Pain Type */}
+          <div>
+            <label htmlFor="chestPainType" className="block text-gray-200 mb-1">
+              Chest Pain Type
+            </label>
+            <select
+              id="chestPainType"
+              value={chestPainType}
+              onChange={(e) => setChestPainType(e.target.value)}
+              className="w-full p-3 rounded-xl bg-gray-800 text-white focus:ring-2 focus:ring-pink-400 transition"
+            >
+              <option value="">Select Chest Pain Type</option>
+              <option value="ATA">ATA</option>
+              <option value="NAP">NAP</option>
+              <option value="ASY">ASY</option>
+              <option value="TA">TA</option>
+            </select>
+          </div>
 
-            {/* Resting Bp Input */}
-            <div>
-              <label htmlFor="restingBp" className="">
-                <svg>
-                  <path />
-                </svg>
-                Resting Bp
-              </label>
-              <input
-                type="text"
-                name="restingBp"
-                className=""
-                placeholder="Enter your resting Blood pressure"
-                id="restingBp"
-                value={restingBp}
-                onChange={(e) => setRestingBp(e.target.value)}
-              />
-            </div>
+          {/* Resting BP */}
+          <div>
+            <label htmlFor="restingBp" className="block text-gray-200 mb-1">
+              Resting BP
+            </label>
+            <input
+              type="number"
+              id="restingBp"
+              value={restingBp}
+              onChange={(e) => setRestingBp(e.target.value)}
+              placeholder="Enter Resting BP"
+              className="w-full p-3 rounded-xl bg-gray-800 text-white focus:ring-2 focus:ring-pink-400 transition"
+            />
+          </div>
 
-            {/* Cholesterol Input */}
-            <div>
-              <label htmlFor="cholesterol" className="">
-                <svg>
-                  <path />
-                </svg>
-                Cholesterol
-              </label>
-              <input
-                type="text"
-                name="cholesterol"
-                className=""
-                placeholder="Enter your Cholesterol level"
-                id="cholesterol"
-                value={cholesterol}
-                onChange={(e) => setCholesterol(e.target.value)}
-              />
-            </div>
+          {/* Cholesterol */}
+          <div>
+            <label htmlFor="cholesterol" className="block text-gray-200 mb-1">
+              Cholesterol
+            </label>
+            <input
+              type="number"
+              id="cholesterol"
+              value={cholesterol}
+              onChange={(e) => setCholesterol(e.target.value)}
+              placeholder="Enter Cholesterol level"
+              className="w-full p-3 rounded-xl bg-gray-800 text-white focus:ring-2 focus:ring-pink-400 transition"
+            />
+          </div>
 
-            {/* fasting Bs Input */}
-            <div>
-              <label htmlFor="fastingBs" className="">
-                <svg>
-                  <path />
-                </svg>
-                Fasting Bs
-              </label>
-              <input
-                type="text"
-                name="fastingBs"
-                className=""
-                placeholder="Enter your Fasting blood sugar level"
-                id="fastingBs"
-                value={fastingBs}
-                onChange={(e) => setFastingBs(e.target.value)}
-              />
-            </div>
+          {/* Fasting BS */}
+          <div>
+            <label htmlFor="fastingBs" className="block text-gray-200 mb-1">
+              Fasting Blood Sugar
+            </label>
+            <input
+              type="number"
+              id="fastingBs"
+              value={fastingBs}
+              onChange={(e) => setFastingBs(e.target.value)}
+              placeholder="Enter Fasting BS (0/1)"
+              className="w-full p-3 rounded-xl bg-gray-800 text-white focus:ring-2 focus:ring-pink-400 transition"
+            />
+          </div>
 
-            {/* resting Ecg Input */}
-            <div>
-              <label htmlFor="restingEcg" className="">
-                <svg>
-                  <path />
-                </svg>
-                Resting Ecg
-              </label>
-              <input
-                type="text"
-                name="restingEcg"
-                className=""
-                placeholder="Select your Resting Ecg level"
-                id="restingEcg"
-                value={restingEcg}
-                onChange={(e) => setRestingEcg(e.target.value)}
-              />
-            </div>
+          {/* Resting ECG */}
+          <div>
+            <label htmlFor="restingEcg" className="block text-gray-200 mb-1">
+              Resting ECG
+            </label>
+            <select
+              id="restingEcg"
+              value={restingEcg}
+              onChange={(e) => setRestingEcg(e.target.value)}
+              className="w-full p-3 rounded-xl bg-gray-800 text-white focus:ring-2 focus:ring-pink-400 transition"
+            >
+              <option value="">Select ECG</option>
+              <option value="Normal">Normal</option>
+              <option value="ST">ST</option>
+              <option value="LVH">LVH</option>
+            </select>
+          </div>
 
-            {/* max Hr Input */}
-            <div>
-              <label htmlFor="maxHr" className="">
-                <svg>
-                  <path />
-                </svg>
-                Max Hr
-              </label>
-              <input
-                type="text"
-                name="maxHr"
-                className=""
-                placeholder="Enter your maximum Heart rate"
-                id="maxHr"
-                value={maxHr}
-                onChange={(e) => setMaxHr(e.target.value)}
-              />
-            </div>
+          {/* Max HR */}
+          <div>
+            <label htmlFor="maxHr" className="block text-gray-200 mb-1">
+              Max HR
+            </label>
+            <input
+              type="number"
+              id="maxHr"
+              value={maxHr}
+              onChange={(e) => setMaxHr(e.target.value)}
+              placeholder="Enter Max Heart Rate"
+              className="w-full p-3 rounded-xl bg-gray-800 text-white focus:ring-2 focus:ring-pink-400 transition"
+            />
+          </div>
 
-            {/* Exercise Angina Input */}
-            <div>
-              <label htmlFor="exerciseAngina" className="">
-                <svg>
-                  <path />
-                </svg>
-                Exercise Angina
-              </label>
-              <input
-                type="text"
-                name="exerciseAngina"
-                className=""
-                placeholder="Do you have Exercise Angine"
-                id="exerciseAngina"
-                value={exerciseAngina}
-                onChange={(e) => setExerciseAngina(e.target.value)}
-              />
-            </div>
+          {/* Exercise Angina */}
+          <div>
+            <label
+              htmlFor="exerciseAngina"
+              className="block text-gray-200 mb-1"
+            >
+              Exercise Angina
+            </label>
+            <select
+              id="exerciseAngina"
+              value={exerciseAngina}
+              onChange={(e) => setExerciseAngina(e.target.value)}
+              className="w-full p-3 rounded-xl bg-gray-800 text-white focus:ring-2 focus:ring-pink-400 transition"
+            >
+              <option value="">Select Option</option>
+              <option value="Y">Yes</option>
+              <option value="N">No</option>
+            </select>
+          </div>
 
-            {/* Old Peak Input */}
-            <div>
-              <label htmlFor="oldPeak" className="">
-                <svg>
-                  <path />
-                </svg>
-                Old Peak
-              </label>
-              <input
-                type="text"
-                name="oldPeak"
-                className=""
-                placeholder="Enter your Old peak"
-                id="oldPeak"
-                value={oldPeak}
-                onChange={(e) => setOldPeak(e.target.value)}
-              />
-            </div>
+          {/* Old Peak */}
+          <div>
+            <label htmlFor="oldPeak" className="block text-gray-200 mb-1">
+              Old Peak
+            </label>
+            <input
+              type="number"
+              step="0.1"
+              id="oldPeak"
+              value={oldPeak}
+              onChange={(e) => setOldPeak(e.target.value)}
+              placeholder="Enter Old Peak"
+              className="w-full p-3 rounded-xl bg-gray-800 text-white focus:ring-2 focus:ring-pink-400 transition"
+            />
+          </div>
 
-            {/* St SlopeInput */}
-            <div>
-              <label htmlFor="stSlope" className="">
-                <svg>
-                  <path />
-                </svg>
-                St Slope
-              </label>
-              <input
-                type="text"
-                name="stSlope"
-                className=""
-                placeholder="Select your st slope"
-                id="stSlope"
-                value={stSlope}
-                onChange={(e) => setStSlope(e.target.value)}
-              />
-            </div>
+          {/* ST Slope */}
+          <div>
+            <label htmlFor="stSlope" className="block text-gray-200 mb-1">
+              ST Slope
+            </label>
+            <select
+              id="stSlope"
+              value={stSlope}
+              onChange={(e) => setStSlope(e.target.value)}
+              className="w-full p-3 rounded-xl bg-gray-800 text-white focus:ring-2 focus:ring-pink-400 transition"
+            >
+              <option value="">Select ST Slope</option>
+              <option value="Up">Up</option>
+              <option value="Flat">Flat</option>
+              <option value="Down">Down</option>
+            </select>
           </div>
         </div>
       </form>

@@ -68,7 +68,8 @@ const stroke = async (req, res) => {
     if (
       work_type !== "Private" &&
       work_type !== "Self-employed" &&
-      work_type !== "Govt_job"
+      work_type !== "Govt_job" &&
+      work_type !== "children"
     ) {
       return res
         .status(400)
