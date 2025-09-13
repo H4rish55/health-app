@@ -1,11 +1,13 @@
 import React from 'react'
 import NavBar from '../../components/NavBar'
+import HeartPredictPage from '../main/HeartPredictPage'
+import StrokePredictPage from '../main/StrokePredictPage'
+import DiabetesPredictPage from '../main/DiabetesPredictPage'
 
 const UserHomeScreen = () => {
   return (
     <div>
-        <NavBar />
-        UserHomeScreen
+        <StrokePredictPage/>
     </div>
   )
 }

@@ -14,10 +14,12 @@ export const usePredictStore = create((set) => ({
         try {
             const response = await axios.post("/api/v1/predict/stroke", input)
             set({prediction: response.data.prediction, probability: response.data.probability, data: response.data.data, strokePredict: false})
+            return response.data
         } catch (error) {
             toast.error(error.response.data.message || "Stroke prediction Failed")
             set({strokePredict: false, prediction: null, probability: null, data: null })
             console.log("Error in Stroke predict store:", error.message)
+            throw error
         }
     },
 
@@ -26,10 +28,12 @@ export const usePredictStore = create((set) => ({
         try {
             const response = await axios.post("/api/v1/predict/diabetes", input)
             set({prediction: response.data.prediction, probability: response.data.probability, data: response.data.data, diabetesPredict: false})
+            return response.data
         } catch (error) {
             toast.error(error.response.data.message || "Diabetes prediction failed")
             set({diabetesPredict: false, prediction: null, probability: null, data: null})
             console.log("Error in diabetes predict store:", error.message)
+            throw error
         }
     },
 
@@ -38,10 +42,12 @@ export const usePredictStore = create((set) => ({
         try {
             const response = await axios.post("/api/v1/predict/heart", input)
             set({prediction: response.data.prediction, probability: response.data.probability, data: response.data.data, heartPredict: false})
+            return response.data
         } catch (error) {
             toast.error(error.response.data.message || "Heart disease prediction failed")
             set({heartPredict: false, prediction: null, probability: null, data: null})
             console.log("Error in heart predict store:", error.message)
+            throw error 
         }
     }
 }))
