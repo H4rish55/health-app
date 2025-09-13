@@ -9,6 +9,7 @@ import { useAuthStore } from "./store/authUser";
 import { useEffect } from "react";
 import LoadingSpinner from "./components/LoadingSpinner";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
+import Footer from "./components/Footer";
 
 //protect routes that require authentication
 const ProtectedRoute = ({ children }) => {
