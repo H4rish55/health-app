@@ -10,6 +10,10 @@ import { useEffect } from "react";
 import LoadingSpinner from "./components/LoadingSpinner";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import Footer from "./components/Footer";
+import ModelLayout from "./layouts/ModelLayout";
+import StrokePredictPage from "./pages/main/StrokePredictPage";
+import DiabetesPredictPage from "./pages/main/DiabetesPredictPage";
+import HeartPredictPage from "./pages/main/HeartPredictPage";
 
 //protect routes that require authentication
 const ProtectedRoute = ({ children }) => {
@@ -23,8 +27,8 @@ const ProtectedRoute = ({ children }) => {
     return <Navigate to={"/verify-email"} replace />;
   }
 
-  console.log(isAuthenticated)
-  console.log(user)
+  console.log(isAuthenticated);
+  console.log(user);
 
   return children;
 };
@@ -34,7 +38,7 @@ const RedirectAuthenticatedUser = ({ children }) => {
   const { user, isAuthenticated } = useAuthStore();
 
   if (user?.isVerified && isAuthenticated) {
-    return <Navigate to={"/"} replace />;
+    return <Navigate to={"/stroke"} replace />;
   }
 
   return children;
@@ -52,12 +56,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route
-          path="/"
-          element={
-              <HomePage />
-          }
-        />
+        <Route path="/" element={<HomePage />} />
 
         <Route
           path="/login"
@@ -96,6 +95,17 @@ function App() {
             </RedirectAuthenticatedUser>
           }
         />
+        <Route
+          element={
+            <ProtectedRoute>
+              <ModelLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route path="/stroke" element={<StrokePredictPage />} />
+          <Route path="/diabetes" element={<DiabetesPredictPage />} />
+          <Route path="/heart-disease" element={<HeartPredictPage />} />
+        </Route>
       </Routes>
 
       <Toaster />
