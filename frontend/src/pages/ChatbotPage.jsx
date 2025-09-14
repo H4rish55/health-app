@@ -104,7 +104,7 @@ const ChatbotPage = () => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 20 }}
             onClick={() => setOpen(true)}
-            className="group relative inline-flex h-14 w-14 items-center justify-center rounded-full bg-gray-900/80 border border-white/10 backdrop-blur shadow-lg"
+            className="group relative inline-flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-r from-indigo-400 via-indigo-500 to-purple-400 border border-white/10 backdrop-blur shadow-lg"
           >
             <span className="absolute -inset-[2px] rounded-full opacity-70 blur-sm bg-[conic-gradient(var(--tw-gradient-stops))] from-indigo-400 via-indigo-500 to-purple-400" />
             <Bot className="relative h-6 w-6 text-white group-hover:scale-110 transition" />

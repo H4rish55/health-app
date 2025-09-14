@@ -221,18 +221,18 @@ const AuthScreen = () => {
                     accuracy: "94%",
                   },
                   {
-                    title: "Diabetes Prediction",
-                    desc: "Machine learning models assess glucose patterns and lifestyle factors for early detection",
-                    icon: Activity,
-                    color: "from-blue-500 to-cyan-500",
-                    accuracy: "91%",
-                  },
-                  {
                     title: "Heart Disease Detection",
                     desc: "Deep learning algorithms analyze ECG data and symptoms to identify cardiac conditions",
                     icon: Heart,
                     color: "from-purple-500 to-pink-500",
                     accuracy: "96%",
+                  },
+                  {
+                    title: "Diabetes Prediction",
+                    desc: "Machine learning models assess glucose patterns and lifestyle factors for early detection",
+                    icon: Activity,
+                    color: "from-blue-500 to-cyan-500",
+                    accuracy: "91%",
                   },
                 ].map((model, index) => (
                   <div
@@ -395,7 +395,8 @@ const AuthScreen = () => {
                   </span>
                 </h2>
                 <p className="text-base sm:text-lg lg:text-xl text-gray-400 mb-6 sm:mb-8 max-w-2xl mx-auto px-4">
-                  Discover how AI can bring smarter, faster, and safer health predictions — powered by VitalIQ.
+                  Discover how AI can bring smarter, faster, and safer health
+                  predictions — powered by VitalIQ.
                 </p>
                 <button
                   className="group bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white px-8 sm:px-12 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-semibold text-base sm:text-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-indigo-500/30 flex items-center mx-auto"
