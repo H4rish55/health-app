@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { usePredictStore } from "../../store/predictStore";
 import { Brain } from "lucide-react";
-import ChatbotPage from "../ChatbotPage";
 
 const StrokePredictPage = () => {
   const [gender, setGender] = useState("");
@@ -523,7 +522,6 @@ const StrokePredictPage = () => {
           )}
         </div>
       </div>
-      <ChatbotPage />
     </div>
   );
 };

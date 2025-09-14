@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { usePredictStore } from "../../store/predictStore";
 import { Activity } from "lucide-react";
-import ChatbotPage from "../ChatbotPage";
 
 const DiabetesPredictPage = () => {
   const [pregnancies, setPregnancies] = useState("");
@@ -268,7 +267,6 @@ const DiabetesPredictPage = () => {
           )}
         </div>
       </div>
-      <ChatbotPage />
     </div>
   );
 };
