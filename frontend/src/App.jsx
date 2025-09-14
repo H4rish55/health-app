@@ -107,7 +107,7 @@ function App() {
           <Route path="/heart-disease" element={<HeartPredictPage />} />
         </Route>
       </Routes>
-
+      <Footer />
       <Toaster />
     </>
   );
