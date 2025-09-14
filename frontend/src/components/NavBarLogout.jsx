@@ -16,7 +16,7 @@ const NavBarLogout = () => {
           </div>
           <div className="flex items-center space-x-3 sm:space-x-6">
             <button className="text-gray-300 hover:text-white font-medium text-sm sm:text-base transition-all duration-300 hover:-translate-y-0.5">
-              BMI
+              <Link to={"/bmi"}>BMI</Link>
             </button>
             <button
               className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-3 py-1.5 sm:px-6 sm:py-2 rounded-lg sm:rounded-xl font-semibold text-sm sm:text-base transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/25"

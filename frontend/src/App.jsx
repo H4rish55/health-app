@@ -14,6 +14,7 @@ import ModelLayout from "./layouts/ModelLayout";
 import StrokePredictPage from "./pages/main/StrokePredictPage";
 import DiabetesPredictPage from "./pages/main/DiabetesPredictPage";
 import HeartPredictPage from "./pages/main/HeartPredictPage";
+import BmiPage from "./pages/main/BmiPage";
 
 //protect routes that require authentication
 const ProtectedRoute = ({ children }) => {
@@ -106,6 +107,11 @@ function App() {
           <Route path="/diabetes" element={<DiabetesPredictPage />} />
           <Route path="/heart-disease" element={<HeartPredictPage />} />
         </Route>
+
+        <Route 
+          path="/bmi"
+          element={<BmiPage />}
+        />
       </Routes>
       <Footer />
       <Toaster />
