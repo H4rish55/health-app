@@ -1,17 +1,19 @@
 const { z } = require("zod");
 
+const allowed = z.enum(["heart", "diabetes", "stroke"])
+
 const chatSchema = z.object({
   messages: z
     .array(
       z.object({
-        role: z.enum(["user", "assitant", "system"]),
+        role: z.enum(["user", "assistant", "system"]),
         content: z.string().min(1),
       })
     )
     .min(1),
   context: z
     .object({
-      model: z.enum(["heart", "diabetes", "stroke"]),
+      model: z.string().optional().pipe(allowed.catch("heart")),
       prediction: z
         .object({
           label: z.string().optional(),

@@ -69,7 +69,7 @@ const heart = async (req, res) => {
 
     const fasting_bs_lower = fasting_bs.toLowerCase();
 
-    if (fasting_bs_lower !== "normal" && fasting_bs !== "high") {
+    if (fasting_bs_lower !== "normal" && fasting_bs_lower !== "high") {
       return res
         .status(400)
         .json({
@@ -80,12 +80,12 @@ const heart = async (req, res) => {
 
     const resting_ecg_lower = resting_ecg.toLowerCase();
 
-    if (resting_ecg_lower !== "normal" && resting_ecg_lower !== "abnormal") {
+    if (resting_ecg_lower !== "normal" && resting_ecg_lower !== "lvh", resting_ecg_lower !== "st") {
       return res
         .status(400)
         .json({
           success: false,
-          message: "ECG levels must be Normal or Abnormal",
+          message: "ECG levels must be Normal, LVH or ST",
         });
     }
 

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { usePredictStore } from "../../store/predictStore";
 import { HeartPulse } from "lucide-react";
+import ChatbotPage from "../ChatbotPage";
 
 const HeartPredictPage = () => {
   const [age, setAge] = useState("");
@@ -385,6 +386,7 @@ const HeartPredictPage = () => {
           )}
         </div>
       </div>
+      <ChatbotPage />
     </div>
   );
 };

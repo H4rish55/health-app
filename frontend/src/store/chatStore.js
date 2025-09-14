@@ -11,6 +11,7 @@ export const useChatStore = create((set) => ({
         try {
             const response = await axios.post("/api/v1/chat/chatbot", input)
             set({ reply: response.data.reply,usage: response.data.usage, isChatting: false })
+            return response.data.reply
         } catch (error) {
             toast.error(error.response.data.message || "Failed to connect to chatBot")
             set({ isChatting: false, reply: null, usage: null })

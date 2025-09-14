@@ -23,7 +23,7 @@ const chatBot = async (req, res) => {
       : "NO_CONTEXT";
 
     const response = await openai.responses.create({
-      model: "gpt-5",
+      model: "gpt-4.1-mini",
       input: [
         { role: "system", content: SYSTEM_PROMPT },
         { role: "system", content: contextBlock },
@@ -39,7 +39,7 @@ const chatBot = async (req, res) => {
       usage: response.usage ?? null,
     });
   } catch (error) {
-    console.log("Error in chatbot controller:", error.messages);
+    console.log("Error in chatbot controller:", error.message);
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 };
