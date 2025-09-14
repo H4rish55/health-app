@@ -2,6 +2,8 @@
 import React, { useMemo, useState } from "react";
 import { Loader2, Weight, Ruler, Activity } from "lucide-react";
 import { useBmiStore } from "../../store/bmiStore";
+import ModelLayout from "../../layouts/ModelLayout";
+import NavBarLogout from "../../components/NavBarLogout";
 
 function classifyBMI(b) {
   if (b == null || Number.isNaN(b)) return { label: "-", color: "bg-white/20", tone: "text-white/80" };
@@ -37,7 +39,9 @@ export default function BmiPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-slate-900 to-gray-950 text-white py-16">
+    <>
+    <NavBarLogout />
+      <div className="min-h-screen bg-gradient-to-br from-gray-950 via-slate-900 to-gray-950 text-white py-16 pt-23">
       <div className="max-w-5xl mx-auto px-6">
         <header className="mb-8">
           <h1 className="text-3xl md:text-4xl font-semibold">BMI Calculator</h1>
@@ -55,7 +59,7 @@ export default function BmiPage() {
               onClick={() => setUnit(opt.key)}
               className={`px-4 md:px-5 py-2.5 rounded-xl text-sm md:text-base font-medium transition ${
                 unit === opt.key
-                  ? "bg-gradient-to-r from-indigo-400 to-purple-400 text-black/90"
+                  ? "bg-gradient-to-r from-indigo-400 to-purple-400 text-white/80"
                   : "text-white/80 hover:bg-white/10"
               }`}
             >
@@ -115,7 +119,7 @@ export default function BmiPage() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-400 to-purple-400 px-6 md:px-7 py-3 md:py-3.5 text-base font-semibold text-black/90 disabled:opacity-60"
+                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-400 to-purple-400 px-6 md:px-7 py-3 md:py-3.5 text-base font-semibold text-white/80 disabled:opacity-60"
               >
                 {isLoading ? (
                   <>
@@ -169,5 +173,7 @@ export default function BmiPage() {
         </div>
       </div>
     </div>
+    </>
+    
   );
 }

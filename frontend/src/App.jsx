@@ -108,9 +108,13 @@ function App() {
           <Route path="/heart-disease" element={<HeartPredictPage />} />
         </Route>
 
-        <Route 
+        <Route
           path="/bmi"
-          element={<BmiPage />}
+          element={
+            <ProtectedRoute>
+              <BmiPage />
+            </ProtectedRoute>
+          }
         />
       </Routes>
       <Footer />
