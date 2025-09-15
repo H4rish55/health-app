@@ -15,6 +15,7 @@ import StrokePredictPage from "./pages/main/StrokePredictPage";
 import DiabetesPredictPage from "./pages/main/DiabetesPredictPage";
 import HeartPredictPage from "./pages/main/HeartPredictPage";
 import BmiPage from "./pages/main/BmiPage";
+import DoctorPage from "./pages/home/DoctorPage";
 
 //protect routes that require authentication
 const ProtectedRoute = ({ children }) => {
@@ -41,6 +42,20 @@ const RedirectAuthenticatedUser = ({ children }) => {
   if (user?.isVerified && isAuthenticated) {
     return <Navigate to={"/"} replace />;
   }
+
+  return children;
+};
+
+const DoctorRoute = ({ children }) => {
+  const { isAuthenticated, user, role, isCheckingAuth } = useAuthStore();
+
+  if (isCheckingAuth) return <LoadingSpinner />;
+
+  if (!isAuthenticated) return <Navigate to="/login" replace />;
+
+  if (!user?.isVerified) return <Navigate to="/verify-email" replace />;
+
+  if (role !== "doctor") return <Navigate to="/" replace />;
 
   return children;
 };
@@ -114,6 +129,15 @@ function App() {
             <ProtectedRoute>
               <BmiPage />
             </ProtectedRoute>
+          }
+        />
+
+        <Route 
+          path="/doctor"
+          element={
+            <DoctorRoute>
+              <DoctorPage />
+            </DoctorRoute>
           }
         />
       </Routes>

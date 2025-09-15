@@ -14,11 +14,12 @@ export const useAuthStore = create((set) => ({
     isResetPassword: false,
     message: null,
     error: null,
+    role: null,
     signup: async (credentials) => {
         set({isSigningUp: true})
         try {
             const response = await axios.post("/api/v1/auth/signup", credentials)
-            set({ user: response.data.user, isAuthenticated: true, isSigningUp: false })
+            set({ user: response.data.user, isAuthenticated: true, isSigningUp: false, role: response.data.user.role })
             toast.success("Account created successfully")
             return { ok: true }
         } catch (error) {
@@ -31,7 +32,7 @@ export const useAuthStore = create((set) => ({
         set({isLogginIn: true})
         try {
             const response = await axios.post("/api/v1/auth/login", credentials)
-            set({ user: response.data.user, isAuthenticated: true, isLogginIn: false })
+            set({ user: response.data.user, isAuthenticated: true, isLogginIn: false, role: response.data.user.role })
             toast.success("Logged In successfully")
         } catch (error) {
             toast.error(error.response.data.message || "Login Failed")
@@ -54,7 +55,7 @@ export const useAuthStore = create((set) => ({
         set({isCheckingAuth: true})
         try {
             const response = await axios.get('/api/v1/auth/auth-check')
-            set({ user: response.data.user, isAuthenticated: true, isCheckingAuth: false })
+            set({ user: response.data.user, isAuthenticated: true, isCheckingAuth: false, role: response.data.user?.role ?? null })
         } catch (error) {
             set({ isCheckingAuth: false, isAuthenticated: false, user: null })
             throw error

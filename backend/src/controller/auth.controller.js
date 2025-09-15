@@ -152,12 +152,10 @@ const login = async (req, res) => {
       return res.status(400).json({ success: false, message: "Invalid roles" });
     }
 
-    const isValidRole = await User.findOne({ role: role });
-
-    if (!isValidRole) {
+    if (user.role !== role) {
       return res
         .status(400)
-        .json({ success: false, message: "Invalid credentials" });
+        .json({ success: false, message: "Invalid role for this account" });
     }
 
     generateTokenAndSetCookie(user._id, res);
@@ -243,12 +241,10 @@ const resetPassword = async (req, res) => {
     user.resetPasswordExpiresAt = undefined;
 
     if (password.length < 7) {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          message: "Password must be atleast 7 characters",
-        });
+      return res.status(400).json({
+        success: false,
+        message: "Password must be atleast 7 characters",
+      });
     }
 
     await user.save();
@@ -266,13 +262,13 @@ const resetPassword = async (req, res) => {
 
 const checkAuth = async (req, res) => {
   try {
-    const user = await User.findById(req.user).select("-password")
+    const user = await User.findById(req.user).select("-password");
 
-    if(!user){
-      res.status(400).json({ success: false, message: "User Not Found" })
+    if (!user) {
+      res.status(400).json({ success: false, message: "User Not Found" });
     }
 
-    res.status(200).json({ success: true, user: req.user });
+    res.status(200).json({ success: true, user });
   } catch (error) {
     console.log("Error in auth check controller:", error.message);
     res.status(500).json({ success: false, message: "Internal Server Error" });

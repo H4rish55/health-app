@@ -13,7 +13,7 @@ const SignUpPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState("idle"); // idle, loading, success
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const { signup } = useAuthStore();
 
@@ -31,12 +31,20 @@ const SignUpPage = () => {
 
     setIsSubmitting(true);
     setSubmitStatus("loading");
-    
+
     try {
       const res = await signup({ username, email, password, role });
-      if(res?.ok){
+      if (res?.ok) {
         setSubmitStatus("success");
         navigate("/verify-email");
+      }
+      if (res?.ok) {
+        const { user } = useAuthStore.getState();
+        if (user?.role === "doctor") {
+          navigate("/doctor", { replace: true });
+        } else {
+          navigate("/", { replace: true });
+        }
       }
     } catch (error) {
       setSubmitStatus("idle");

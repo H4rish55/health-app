@@ -1,49 +1,60 @@
 import { useState } from "react";
 import EyeIcon from "../components/EyeIcon";
 import { useAuthStore } from "../store/authUser";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const VitalIQLogin = () => {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [role, setRole] = useState("")
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
 
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState("idle"); // idle, loading, success
 
-  const { login } = useAuthStore()
+  const { login } = useAuthStore();
+
+  const navigate = useNavigate();
 
   const togglePassword = () => {
     setShowPassword(!showPassword);
   };
 
   const isFormValid = () => {
-    return email && password && role
+    return email && password && role;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(!isFormValid) return
+    if (!isFormValid) return;
 
-    setIsSubmitting(true)
-    setSubmitStatus("loading")
+    setIsSubmitting(true);
+    setSubmitStatus("loading");
 
     try {
-      const result = await login({ email, password, role })
+      const result = await login({ email, password, role });
 
-      if(result && result.success !== false){
-        setSubmitStatus("success")
+      if (result && result.success !== false) {
+        setSubmitStatus("success");
       } else {
-        setSubmitStatus("idle")
+        setSubmitStatus("idle");
       }
-    } catch (error) {
-      setSubmitStatus("idle")
-      console.log(error.message)
-    } finally {
-      setIsSubmitting(false)
-    }
 
+      await login({ email, password, role });
+      const { user } = useAuthStore.getState();
+      if (user?.role === "doctor") {
+        navigate("/doctor", { replace: true });
+      } else {
+        navigate("/", { replace: true });
+      }
+      setSubmitStatus("success");
+      
+    } catch (error) {
+      setSubmitStatus("idle");
+      console.log(error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -93,7 +104,10 @@ const VitalIQLogin = () => {
             <div className="space-y-6">
               {/* Email Input */}
               <div className="space-y-2">
-                <label htmlFor="email" className="text-sm font-medium text-gray-300 flex items-center gap-2">
+                <label
+                  htmlFor="email"
+                  className="text-sm font-medium text-gray-300 flex items-center gap-2"
+                >
                   <svg
                     className="w-4 h-4"
                     fill="none"
@@ -122,7 +136,10 @@ const VitalIQLogin = () => {
 
               {/* Password Input */}
               <div className="space-y-2">
-                <label htmlFor="password" className="text-sm font-medium text-gray-300 flex items-center gap-2">
+                <label
+                  htmlFor="password"
+                  className="text-sm font-medium text-gray-300 flex items-center gap-2"
+                >
                   <svg
                     className="w-4 h-4"
                     fill="none"
@@ -247,7 +264,7 @@ const VitalIQLogin = () => {
               {/* Forgot Password Link */}
               <div className="text-right">
                 <Link
-                  to={'/forgot-password'}
+                  to={"/forgot-password"}
                   className="text-sm text-indigo-400 hover:text-indigo-300 transition-colors"
                 >
                   Forgot your password?
