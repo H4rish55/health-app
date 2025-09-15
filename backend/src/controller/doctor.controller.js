@@ -88,7 +88,7 @@ const patientRecords = async (req, res) => {
       });
   } catch (error) {
     console.log("Error in doctor controller:", error.message);
-    res.status(500).json({ success: true, message: "Internal Server Error" });
+    res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 };
 
