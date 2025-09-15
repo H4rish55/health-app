@@ -51,7 +51,7 @@ const DoctorRoute = ({ children }) => {
 
   if (isCheckingAuth) return <LoadingSpinner />;
 
-  if (!isAuthenticated) return <Navigate to="/login" replace />;
+  if (!isAuthenticated) return <Navigate to="/" replace />;
 
   if (!user?.isVerified) return <Navigate to="/verify-email" replace />;
 
