@@ -126,14 +126,14 @@ const stroke = async (req, res) => {
     const response = await axios.post("http://127.0.0.1:5000/predict/stroke", {
       features: {
         gender,
-        age,
+        age: Number(age),
         hypertension: hypertensionBinary,
         heart_disease: heartDiseaseBinary,
-        ever_married,
+        ever_married: everMarriedLower === "yes" ? "Yes": "No",
         work_type,
         Residence_type: residence_type,
-        avg_glucose_level,
-        bmi,
+        avg_glucose_level: Number(avg_glucose_level),
+        bmi: Number(bmi),
         smoking_status,
       },
     });

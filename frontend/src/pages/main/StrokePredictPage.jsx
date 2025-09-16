@@ -76,6 +76,15 @@ const StrokePredictPage = () => {
     return `${val.toFixed(1)}%`;
   };
 
+  const riskLabelFormat = (p) => {
+    if(p === null) return "No Stroke Risk"
+    const prob = typeof p === "number" && p <= 1 ? p : p / 100;
+    if (prob >= 0.30) return "Stroke Risk detected";
+    if (prob >= 0.20) return "Moderate Stroke Risk";
+    if (prob >= 0.10) return "Elevated Stroke Risk";
+    return "No Stroke Risk";
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-950 via-slate-900 to-gray-950 text-white p-6">
       <div className="max-w-4xl mx-auto">
@@ -506,9 +515,7 @@ const StrokePredictPage = () => {
                 <div className="p-4 rounded-lg bg-slate-900/70 border border-white/10">
                   <p className="text-sm text-gray-400">Prediction</p>
                   <p className="text-2xl font-bold mt-1">
-                    {prediction === 1
-                      ? "Stroke Risk detected"
-                      : "No Stroke Risk"}
+                    {riskLabelFormat(probability)}
                   </p>
                 </div>
                 <div className="p-4 rounded-lg bg-slate-900/70 border border-white/10">

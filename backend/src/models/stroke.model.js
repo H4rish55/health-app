@@ -32,7 +32,7 @@ const strokeSchema = new mongoose.Schema({
     },
     work_type: {
         type: String,
-        enum: ['Private', 'Self-employed', 'Govt_job'],
+        enum: ['Private', 'Self-employed', 'Govt_job', "children"],
         required: true,
         trim: true
     },
