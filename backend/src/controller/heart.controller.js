@@ -78,9 +78,9 @@ const heart = async (req, res) => {
         });
     }
 
-    const resting_ecg_lower = resting_ecg.toLowerCase();
+    const resting_ecg_lower = String(resting_ecg).toLowerCase();
 
-    if (resting_ecg_lower !== "normal" && resting_ecg_lower !== "lvh", resting_ecg_lower !== "st") {
+    if (resting_ecg_lower !== "normal" && resting_ecg_lower !== "lvh" && resting_ecg_lower !== "st") {
       return res
         .status(400)
         .json({
@@ -113,6 +113,8 @@ const heart = async (req, res) => {
       return res.status(400).json({ success: false, message: "" });
     }
 
+    const final_ecg = resting_ecg_lower === "st" ? "ST" : resting_ecg_lower === "lvh" ? "LVH" : "Normal"
+
     const newHeart = new Heart({
       age,
       sex,
@@ -120,7 +122,7 @@ const heart = async (req, res) => {
       resting_bp,
       cholesterol,
       fasting_bs: fasting_bs_lower === "normal" ? "Normal" : "High",
-      resting_ecg: resting_ecg_lower === "normal" ? "Normal" : "Abnormal",
+      resting_ecg: final_ecg,
       max_hr,
       exercise_angina: exercise_angina_lower === "yes" ? "Yes" : "No",
       old_peak,
@@ -130,8 +132,6 @@ const heart = async (req, res) => {
     await newHeart.save();
 
     const fasting_bs_binary = fasting_bs_lower === "normal" ? 0 : 1;
-    const resting_ecg_correct =
-      resting_ecg_lower === "abnormal" ? "ST" : "Normal";
     const exercise_angina_correct = exercise_angina_lower === "yes" ? "Y" : "N";
 
     const response = await axios.post("http://127.0.0.1:5000/predict/heart", {
@@ -142,7 +142,7 @@ const heart = async (req, res) => {
         RestingBP: resting_bp,
         Cholesterol: cholesterol,
         FastingBS: fasting_bs_binary,
-        RestingECG: resting_ecg_correct,
+        RestingECG: final_ecg,
         MaxHR: max_hr,
         ExerciseAngina: exercise_angina_correct,
         Oldpeak: old_peak,
