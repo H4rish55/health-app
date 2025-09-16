@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import toast from "react-hot-toast";
-import axios from "axios";
+import { api } from '../lib/api'
 
 export const usePredictStore = create((set) => ({
     data: null,
@@ -12,7 +12,7 @@ export const usePredictStore = create((set) => ({
     stroke: async (input) => {
         set({ strokePredict: true })
         try {
-            const response = await axios.post("/api/v1/predict/stroke", input)
+            const response = await api.post("/v1/predict/stroke", input)
             set({prediction: response.data.prediction, probability: response.data.probability, data: response.data.data, strokePredict: false})
             return response.data
         } catch (error) {
@@ -26,7 +26,7 @@ export const usePredictStore = create((set) => ({
     diabetes: async (input) => {
         set({ diabetesPredict: true })
         try {
-            const response = await axios.post("/api/v1/predict/diabetes", input)
+            const response = await api.post("/v1/predict/diabetes", input)
             set({prediction: response.data.prediction, probability: response.data.probability, data: response.data.data, diabetesPredict: false})
             return response.data
         } catch (error) {
@@ -40,7 +40,7 @@ export const usePredictStore = create((set) => ({
     heart: async (input) => {
         set({ heartPredict: true })
         try {
-            const response = await axios.post("/api/v1/predict/heart", input)
+            const response = await api.post("/v1/predict/heart", input)
             set({prediction: response.data.prediction, probability: response.data.probability, data: response.data.data, heartPredict: false})
             return response.data
         } catch (error) {
