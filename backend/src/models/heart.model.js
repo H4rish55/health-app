@@ -37,7 +37,7 @@ const heartSchema = new mongoose.Schema({
     resting_ecg: {
         type: String,
         required: true,
-        enum: ['Normal', 'Abnormal'],
+        enum: ['Normal', 'LVH', 'ST'],
         trim: true
     },
     max_hr: {
