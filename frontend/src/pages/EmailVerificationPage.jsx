@@ -10,7 +10,7 @@ const EmailVerificationPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState("idle");
 
-  const { verifyEmail } = useAuthStore()
+  const { verifyEmail, user } = useAuthStore()
 
   const isFormValid = () => {
     return code.every((digit) => digit !== "");
@@ -62,6 +62,14 @@ const EmailVerificationPage = () => {
     inputRefs.current[focusIndex].focus();
   };
 
+  const routeAfterAuth = (navigation, users) => {
+    if(!users?.isVerified){
+      navigate("/verify-email", { replace: true })
+      return
+    }
+    navigate(users?.role === "doctor" ? "/doctor": "/", { replace: true })
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     if(!isFormValid) return
@@ -71,7 +79,8 @@ const EmailVerificationPage = () => {
         const result = await verifyEmail(verificationCode)
 
         if(result && result.success !== false){
-            navigate('/')
+            const { user: freshUser } = useAuthStore.getState()
+            routeAfterAuth(navigate, freshUser ?? user)
             setSubmitStatus("success")
         } else {
             setSubmitStatus("idle")

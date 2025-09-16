@@ -14,7 +14,6 @@ export const useAuthStore = create((set) => ({
     isResetPassword: false,
     message: null,
     error: null,
-    role: null,
     signup: async (credentials) => {
         set({isSigningUp: true})
         try {
@@ -37,6 +36,7 @@ export const useAuthStore = create((set) => ({
         } catch (error) {
             toast.error(error.response.data.message || "Login Failed")
             set({ isLogginIn: false, user: null })
+            return { ok: false }
         }
     },
 

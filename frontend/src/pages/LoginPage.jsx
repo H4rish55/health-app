@@ -40,15 +40,13 @@ const VitalIQLogin = () => {
         setSubmitStatus("idle");
       }
 
-      await login({ email, password, role });
-      const { user } = useAuthStore.getState();
-      if (user?.role === "doctor") {
-        navigate("/doctor", { replace: true });
-      } else {
-        navigate("/", { replace: true });
+      const { user, isAuthenticated } = useAuthStore.getState();
+      if(!isAuthenticated){
+        setSubmitStatus("idle")
       }
-      setSubmitStatus("success");
-      
+      if (user?.role === "doctor" && isAuthenticated) {
+        navigate("/doctor", { replace: true });
+      }    
     } catch (error) {
       setSubmitStatus("idle");
       console.log(error.message);

@@ -37,15 +37,9 @@ const SignUpPage = () => {
       if (res?.ok) {
         setSubmitStatus("success");
         navigate("/verify-email");
+        return
       }
-      if (res?.ok) {
-        const { user } = useAuthStore.getState();
-        if (user?.role === "doctor") {
-          navigate("/doctor", { replace: true });
-        } else {
-          navigate("/", { replace: true });
-        }
-      }
+
     } catch (error) {
       setSubmitStatus("idle");
       console.log(error.message);
