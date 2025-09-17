@@ -1,5 +1,6 @@
 const Heart = require("../models/heart.model");
 const axios = require("axios");
+const { ML_BASE_URL } = require('../config/envVars')
 
 const heart = async (req, res) => {
   try {
@@ -134,7 +135,7 @@ const heart = async (req, res) => {
     const fasting_bs_binary = fasting_bs_lower === "normal" ? 0 : 1;
     const exercise_angina_correct = exercise_angina_lower === "yes" ? "Y" : "N";
 
-    const response = await axios.post("http://127.0.0.1:5000/predict/heart", {
+    const response = await axios.post(`${ML_BASE_URL}/predict/heart`, {
       features: {
         Age: age,
         Sex: sex,

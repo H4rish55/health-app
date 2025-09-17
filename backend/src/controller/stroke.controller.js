@@ -1,5 +1,6 @@
 const Stroke = require("../models/stroke.model");
 const axios = require("axios");
+const { ML_BASE_URL } = require('../config/envVars')
 
 const stroke = async (req, res) => {
   try {
@@ -123,7 +124,7 @@ const stroke = async (req, res) => {
     const hypertensionBinary = hypertensionLower === "yes" ? 1 : 0;
     const heartDiseaseBinary = heartDiseaseLower === "yes" ? 1 : 0;
 
-    const response = await axios.post("http://127.0.0.1:5000/predict/stroke", {
+    const response = await axios.post(`${ML_BASE_URL}/predict/stroke`, {
       features: {
         gender,
         age: Number(age),

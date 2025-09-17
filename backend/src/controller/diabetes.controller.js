@@ -1,5 +1,6 @@
 const Diabetes = require("../models/diabetes.model");
 const axios = require("axios");
+const { ML_BASE_URL } = require('../config/envVars')
 
 const diabetes = async (req, res) => {
   try {
@@ -99,7 +100,7 @@ const diabetes = async (req, res) => {
     await newDiabetes.save();
 
     const response = await axios.post(
-      "http://127.0.0.1:5000/predict/diabetes",
+      `${ML_BASE_URL}/predict/diabetes`,
       {
         features: {
           Pregnancies: pregnancies,

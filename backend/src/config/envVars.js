@@ -12,7 +12,8 @@ const ENV_VARS = {
     OPENAI_API: process.env.OPENAI_API,
     SYSTEM_PROMPT: process.env.SYSTEM_PROMPT,
     GOOGLE_MAIL: process.env.GOOGLE_MAIL,
-    GMAIL_USERNAME: process.env.GMAIL_USERNAME
+    GMAIL_USERNAME: process.env.GMAIL_USERNAME,
+    ML_BASE_URL: process.env.ML_BASE_URL || 'http://127.0.0.1:5000',
 }
 
 module.exports = ENV_VARS
