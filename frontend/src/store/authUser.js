@@ -1,6 +1,6 @@
 import toast from 'react-hot-toast'
 import { create } from 'zustand'
-import axios from 'axios'
+import { api } from '../lib/api'
 
 export const useAuthStore = create((set) => ({
 	user: null,
@@ -17,7 +17,7 @@ export const useAuthStore = create((set) => ({
     signup: async (credentials) => {
         set({isSigningUp: true})
         try {
-            const response = await axios.post("/api/v1/auth/signup", credentials)
+            const response = await api.post("/v1/auth/signup", credentials)
             set({ user: response.data.user, isAuthenticated: true, isSigningUp: false, role: response.data.user.role })
             toast.success("Account created successfully")
             return { ok: true }
@@ -30,7 +30,7 @@ export const useAuthStore = create((set) => ({
     login: async (credentials) => {
         set({isLogginIn: true})
         try {
-            const response = await axios.post("/api/v1/auth/login", credentials)
+            const response = await api.post("/v1/auth/login", credentials)
             set({ user: response.data.user, isAuthenticated: true, isLogginIn: false, role: response.data.user.role })
             toast.success("Logged In successfully")
         } catch (error) {
@@ -43,7 +43,7 @@ export const useAuthStore = create((set) => ({
     logout: async () => {
         set({ isLogginOut: true })
         try {
-            await axios.post("/api/v1/auth/logout")
+            await api.post("/v1/auth/logout")
             set({ user: null, isAuthenticated: false, isLogginOut: false })
             toast.success("Logged out successfully")
         } catch (error) {
@@ -54,7 +54,7 @@ export const useAuthStore = create((set) => ({
     authCheck: async () => {
         set({isCheckingAuth: true})
         try {
-            const response = await axios.get('/api/v1/auth/auth-check')
+            const response = await api.get('/v1/auth/auth-check')
             set({ user: response.data.user, isAuthenticated: true, isCheckingAuth: false, role: response.data.user?.role ?? null })
         } catch (error) {
             set({ isCheckingAuth: false, isAuthenticated: false, user: null })
@@ -65,7 +65,7 @@ export const useAuthStore = create((set) => ({
     verifyEmail: async (code) => {
         set({isVerifyingEmail: true})
         try {
-            const response = await axios.post("/api/v1/auth/verify-email", { code })
+            const response = await api.post("/v1/auth/verify-email", { code })
             set({ user: response.data.user, isAuthenticated: true, isVerifyingEmail: false })
             toast.success("Email verification successfull")
             return response.data
@@ -78,7 +78,7 @@ export const useAuthStore = create((set) => ({
     forgotPassword: async (email) => {
         set({ message: null, isForgotPassword: true })
         try {
-            const response = await axios.post("/api/v1/auth/forgot-password", { email })
+            const response = await api.post("/v1/auth/forgot-password", { email })
             set({ message: response.data.message, isForgotPassword: false })
         } catch (error) {
             set({ isForgotPassword: false })
@@ -89,7 +89,7 @@ export const useAuthStore = create((set) => ({
     resetPassword: async (token, password) => {
         set({ isResetPassword: true, error: null })
         try {
-            const response = await axios.post(`/api/v1/auth/reset-password/${token}`, { password })
+            const response = await api.post(`/v1/auth/reset-password/${token}`, { password })
             set({ message: response.data.message, isResetPassword: false })
         } catch (error) {
             set({ isResetPassword: false, error: error.response.data.message })

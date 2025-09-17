@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import toast from 'react-hot-toast';
-import axios from 'axios';
+import { api } from '../lib/api'
 
 export const useDoctorStore = create((set) => ({
     data: null,
@@ -11,7 +11,7 @@ export const useDoctorStore = create((set) => ({
     doctorPage: async () => {
         set({ isDoctor: true })
         try {
-            const response = await axios.get("/api/v1/doctor/patient-records")
+            const response = await api.get("/v1/doctor/patient-records")
             set({ data: response.data.data, total: response.data.total, limit: response.data.limit, page: response.data.page, isDoctor: false })
         } catch (error) {
             set({ isDoctor: false, data: null, total: null, limit: null, page: null })

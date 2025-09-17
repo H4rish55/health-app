@@ -55,7 +55,7 @@ const heart = async (req, res) => {
         .json({ success: false, message: "Invalid chest pain type" });
     }
 
-    if (resting_bp < 50 || resting_bp > 200) {
+    if (resting_bp < 50 || resting_bp > 300) {
       return res
         .status(400)
         .json({ success: false, message: "Invalid resting bp" });
