@@ -15,16 +15,25 @@ const connectDB = require('./config/db');
 const app = express();
 const port = PORT || 4000;
 
+app.set('trust proxy', 1); 
 app.use(express.json());
 app.use(cookieParser());
 
-const allowed = new Set([CLIENT_ORIGIN]);
-if (NODE_ENV !== 'production') allowed.add('http://localhost:5173');
+const ALLOWED_ORIGINS = new Set(
+  String(CLIENT_ORIGIN || '')
+    .split(',')
+    .map(s => s.trim())
+    .filter(Boolean)
+);
+
+if (NODE_ENV !== 'production') {
+  ALLOWED_ORIGINS.add('http://localhost:5173');
+}
 
 app.use(
   cors({
     origin: (origin, cb) => {
-      if (!origin || allowed.has(origin)) return cb(null, true);
+      if (!origin || ALLOWED_ORIGINS.has(origin)) return cb(null, true);
       return cb(new Error(`CORS blocked: ${origin}`));
     },
     credentials: true,
@@ -63,13 +72,17 @@ app.use('/api/v1/chat', chatRoutes);
 if (NODE_ENV === 'production') {
   const distPath = path.resolve(__dirname, '../../frontend/dist');
   app.use(express.static(distPath));
-  // any non-API route → index.html
+
   app.get(/^(?!\/api).*/, (_req, res) => {
     res.sendFile(path.join(distPath, 'index.html'));
   });
 }
 
+app.get('/healthz', (_req, res) => res.status(200).send('ok'));
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port} (env=${NODE_ENV})`);
+  console.log('CORS allowlist:', [...ALLOWED_ORIGINS]);
+  console.log('ML_BASE_URL:', ML_BASE_URL || '(none/local)');
   connectDB();
 });
