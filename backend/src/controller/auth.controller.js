@@ -9,6 +9,7 @@ const {
   sendResetPasswordEmail,
   sendResetSuccessEmail,
 } = require("../mail/email");
+const { CLIENT_ORIGIN } = require("../config/envVars")
 
 const signup = async (req, res) => {
   try {
@@ -204,7 +205,7 @@ const forgotPassword = async (req, res) => {
 
     await sendResetPasswordEmail(
       user.email,
-      `https://vitaliq.one/reset-password/${resetToken}`
+      `${CLIENT_ORIGIN}/reset-password/${resetToken}`
     );
 
     res.status(200).json({
