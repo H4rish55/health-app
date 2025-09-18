@@ -204,7 +204,7 @@ const forgotPassword = async (req, res) => {
 
     await sendResetPasswordEmail(
       user.email,
-      `http://localhost:5173/reset-password/${resetToken}`
+      `https://vitaliq.one/reset-password/${resetToken}`
     );
 
     res.status(200).json({
