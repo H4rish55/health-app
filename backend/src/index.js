@@ -33,10 +33,30 @@ if (NODE_ENV !== 'production') {
 app.use(
   cors({
     origin: (origin, cb) => {
-      if (!origin || ALLOWED_ORIGINS.has(origin)) return cb(null, true);
-      return cb(new Error(`CORS blocked: ${origin}`));
+      if (!origin) return cb(null, true);
+
+      try {
+        const u = new URL(origin);
+        const host = u.hostname;
+
+        const isDev =
+          host === "localhost" || host === "127.0.0.1";
+
+        const isVitalIQ =
+          host === "vitaliq.one" || host.endsWith(".vitaliq.one"); 
+
+        if (isDev || isVitalIQ) return cb(null, true);
+      } catch (_) {
+
+      }
+
+      console.error("CORS blocked:", origin);
+      return cb(new Error("Not allowed by CORS"));
     },
     credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    optionsSuccessStatus: 204,
   })
 );
 
