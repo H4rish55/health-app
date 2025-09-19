@@ -94,6 +94,7 @@ export const useAuthStore = create((set) => ({
         } catch (error) {
             set({ isResetPassword: false, error: error.response.data.message })
             toast.error(error.response.data.message || "Error in reseting password")
+            console.log("Error in reset password store:", error.message)
         }
     }
 }))
