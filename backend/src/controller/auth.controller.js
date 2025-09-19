@@ -9,7 +9,7 @@ const {
   sendResetPasswordEmail,
   sendResetSuccessEmail,
 } = require("../mail/email");
-const { CLIENT_ORIGIN } = require("../config/envVars")
+const { CLIENT_ORIGIN } = require("../config/envVars");
 
 const signup = async (req, res) => {
   try {
@@ -203,10 +203,11 @@ const forgotPassword = async (req, res) => {
 
     await user.save();
 
-    await sendResetPasswordEmail(
-      user.email,
-      `${CLIENT_ORIGIN}/reset-password/${resetToken}`
-    );
+    const resetUrl = new URL(
+      `/reset-password/${encodeURIComponent(resetToken)}`,
+      CLIENT_ORIGIN
+    ).toString();
+    await sendResetPasswordEmail(user.email, resetUrl);
 
     res.status(200).json({
       success: true,
