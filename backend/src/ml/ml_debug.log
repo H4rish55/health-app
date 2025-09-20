@@ -184,3 +184,6 @@
 [2025-09-20 10:12:24] [VERSIONS] {'python': 'Python 3.12.2', 'sklearn': '1.6.1', 'numpy': '1.26.4', 'scipy': '1.13.1', 'pandas': '2.2.2', 'joblib': '1.4.2'}
 [2025-09-20 10:12:25] [LOAD] models loaded successfully
 [2025-09-20 10:12:25] [STARTUP] Starting server on port 5000
+[2025-09-20 11:46:36] [VERSIONS] {'python': 'Python 3.12.2', 'sklearn': '1.6.1', 'numpy': '1.26.4', 'scipy': '1.13.1', 'pandas': '2.2.2', 'joblib': '1.4.2'}
+[2025-09-20 11:46:36] [LOAD] models loaded successfully
+[2025-09-20 11:46:36] [STARTUP] Starting server on port 5000
