@@ -1,8 +1,10 @@
 const Stroke = require("../models/stroke.model");
 const axios = require("axios");
-const { ML_BASE_URL } = require('../config/envVars')
+const { ML_BASE_URL } = require("../config/envVars");
 
 const stroke = async (req, res) => {
+  console.log("[stroke] HIT", { url: req.originalUrl, method: req.method });
+  console.log("[stroke] BODY", req.body);
   try {
     const {
       gender,
@@ -124,22 +126,62 @@ const stroke = async (req, res) => {
     const hypertensionBinary = hypertensionLower === "yes" ? 1 : 0;
     const heartDiseaseBinary = heartDiseaseLower === "yes" ? 1 : 0;
 
+    console.log("=== STROKE PREDICTION DEBUG ===");
+    console.log("ML_BASE_URL:", ML_BASE_URL);
+    console.log("Full URL:", `${ML_BASE_URL}/predict/stroke`);
+    console.log(
+      "Payload:",
+      JSON.stringify(
+        {
+          features: {
+            gender,
+            age: Number(age),
+            hypertension: hypertensionBinary,
+            heart_disease: heartDiseaseBinary,
+            ever_married: everMarriedLower === "yes" ? "Yes" : "No",
+            work_type,
+            Residence_type: residence_type,
+            avg_glucose_level: Number(avg_glucose_level),
+            bmi: bmi ? Number(bmi) : 0,
+            smoking_status:
+              smoking_status === "Unknown"
+                ? "Unknown"
+                : smoking_status.toLowerCase(),
+          },
+        },
+        null,
+        2
+      )
+    );
+
     const response = await axios.post(`${ML_BASE_URL}/predict/stroke`, {
       features: {
         gender,
         age: Number(age),
         hypertension: hypertensionBinary,
         heart_disease: heartDiseaseBinary,
-        ever_married: everMarriedLower === "yes" ? "Yes": "No",
+        ever_married: everMarriedLower === "yes" ? "Yes" : "No",
         work_type,
         Residence_type: residence_type,
         avg_glucose_level: Number(avg_glucose_level),
-        bmi: Number(bmi),
-        smoking_status,
+        bmi: bmi ? Number(bmi) : 0,
+        smoking_status:
+          smoking_status === "Unknown"
+            ? "Unknown"
+            : smoking_status.toLowerCase(),
       },
     });
 
     const { prediction, probability } = response.data;
+    if (
+      typeof prediction === "undefined" ||
+      typeof probability === "undefined"
+    ) {
+      console.error("[stroke] Bad ML response", response.data);
+      return res
+        .status(502)
+        .json({ success: false, message: "Bad response from model service" });
+    }
 
     newStroke.prediction = prediction;
     newStroke.probability = probability;
@@ -152,8 +194,20 @@ const stroke = async (req, res) => {
       data: newStroke,
     });
   } catch (error) {
-    console.log("Error in stroke controller:", error.message);
-    res.status(500).json({ success: false, message: "Internal Server Error" });
+    const ax = error?.response;
+    console.error("[stroke] ERROR", {
+      name: error?.name,
+      msg: error?.message,
+      code: error?.code,
+      axiosStatus: ax?.status,
+      axiosData: ax?.data,
+      stack: error?.stack?.split("\n").slice(0, 3).join(" | "),
+    });
+    return res.status(ax?.status || 500).json({
+      success: false,
+      message: "Stroke prediction failed",
+      detail: ax?.data || error?.message || "unknown",
+    });
   }
 };
 

@@ -1,0 +1,186 @@
+[2025-09-20 10:02:55] [VERSIONS] {'python': 'Python 3.12.2', 'sklearn': '1.6.1', 'numpy': '1.26.4', 'scipy': '1.13.1', 'pandas': '2.2.2', 'joblib': '1.4.2'}
+[2025-09-20 10:02:56] [LOAD] models loaded successfully
+[2025-09-20 10:02:56] [STARTUP] Starting server on port 4000
+[2025-09-20 10:03:00] [VERSIONS] {'python': 'Python 3.12.2', 'sklearn': '1.6.1', 'numpy': '1.26.4', 'scipy': '1.13.1', 'pandas': '2.2.2', 'joblib': '1.4.2'}
+[2025-09-20 10:03:00] [LOAD] models loaded successfully
+[2025-09-20 10:03:00] [STARTUP] Starting server on port 4000
+[2025-09-20 10:04:59] [VERSIONS] {'python': 'Python 3.12.2', 'sklearn': '1.6.1', 'numpy': '1.26.4', 'scipy': '1.13.1', 'pandas': '2.2.2', 'joblib': '1.4.2'}
+[2025-09-20 10:04:59] [LOAD] models loaded successfully
+[2025-09-20 10:04:59] [STARTUP] Starting server on port 4000
+[2025-09-20 10:05:00] [VERSIONS] {'python': 'Python 3.12.2', 'sklearn': '1.6.1', 'numpy': '1.26.4', 'scipy': '1.13.1', 'pandas': '2.2.2', 'joblib': '1.4.2'}
+[2025-09-20 10:05:00] [VERSIONS] {'python': 'Python 3.12.2', 'sklearn': '1.6.1', 'numpy': '1.26.4', 'scipy': '1.13.1', 'pandas': '2.2.2', 'joblib': '1.4.2'}
+[2025-09-20 10:05:01] [LOAD] models loaded successfully
+[2025-09-20 10:05:01] [LOAD] models loaded successfully
+[2025-09-20 10:05:01] [STARTUP] Starting server on port 4000
+[2025-09-20 10:05:01] [STARTUP] Starting server on port 4000
+[2025-09-20 10:05:03] [REQUEST] POST http://127.0.0.1:5000/predict/stroke
+[2025-09-20 10:05:03] [REQUEST] Headers: {'Accept': 'application/json, text/plain, */*', 'Content-Type': 'application/json', 'User-Agent': 'axios/1.11.0', 'Content-Length': '211', 'Accept-Encoding': 'gzip, compress, deflate, br', 'Host': '127.0.0.1:5000', 'Connection': 'keep-alive'}
+[2025-09-20 10:05:03] [REQUEST] Body: {'features': {'gender': 'Female', 'age': 50, 'hypertension': 1, 'heart_disease': 1, 'ever_married': 'No', 'work_type': 'Private', 'Residence_type': 'Urban', 'avg_glucose_level': 400, 'bmi': 60, 'smoking_status': 'formerly smoked'}}
+[2025-09-20 10:05:03] ==================================================
+[2025-09-20 10:05:03] [STROKE] Endpoint hit!
+[2025-09-20 10:05:03] [STROKE] Request method: POST
+[2025-09-20 10:05:03] [STROKE] Request URL: http://127.0.0.1:5000/predict/stroke
+[2025-09-20 10:05:03] [STROKE] Content-Type: application/json
+[2025-09-20 10:05:03] [STROKE] Raw data length: 211
+[2025-09-20 10:05:03] [STROKE] Raw data (first 200 chars): b'{"features":{"gender":"Female","age":50,"hypertension":1,"heart_disease":1,"ever_married":"No","work_type":"Private","Residence_type":"Urban","avg_glucose_level":400,"bmi":60,"smoking_status":"formerl'
+[2025-09-20 10:05:03] [STROKE] Parsed JSON: {'features': {'gender': 'Female', 'age': 50, 'hypertension': 1, 'heart_disease': 1, 'ever_married': 'No', 'work_type': 'Private', 'Residence_type': 'Urban', 'avg_glucose_level': 400, 'bmi': 60, 'smoking_status': 'formerly smoked'}}
+[2025-09-20 10:05:03] [STROKE] Features: {'gender': 'Female', 'age': 50, 'hypertension': 1, 'heart_disease': 1, 'ever_married': 'No', 'work_type': 'Private', 'Residence_type': 'Urban', 'avg_glucose_level': 400, 'bmi': 60, 'smoking_status': 'formerly smoked'}
+[2025-09-20 10:05:03] [STROKE] Final features for model: {'gender': 'Female', 'age': 50, 'hypertension': 1, 'heart_disease': 1, 'ever_married': 'No', 'work_type': 'Private', 'Residence_type': 'Urban', 'avg_glucose_level': 400, 'bmi': 60, 'smoking_status': 'formerly smoked'}
+[2025-09-20 10:05:03] [STROKE] DataFrame created: shape=(1, 10), columns=['gender', 'age', 'hypertension', 'heart_disease', 'ever_married', 'work_type', 'Residence_type', 'avg_glucose_level', 'bmi', 'smoking_status']
+[2025-09-20 10:05:03] [STROKE] DataFrame content:
+   gender  age  hypertension  heart_disease ever_married work_type Residence_type  avg_glucose_level  bmi   smoking_status
+0  Female   50             1              1           No   Private          Urban                400   60  formerly smoked
+[2025-09-20 10:05:03] [STROKE] Model type: <class 'imblearn.pipeline.Pipeline'>
+[2025-09-20 10:05:03] [STROKE] Model class: Pipeline
+[2025-09-20 10:05:03] [STROKE] Attempting prediction...
+[2025-09-20 10:05:03] [STROKE] Raw probability: 0.00046282741823233664
+[2025-09-20 10:05:03] [STROKE] Final prediction: 0 (threshold: 0.22)
+[2025-09-20 10:05:03] [STROKE] Returning result: {'prediction': 0, 'probability': 0.0}
+[2025-09-20 10:05:07] [REQUEST] POST http://127.0.0.1:5000/predict/stroke
+[2025-09-20 10:05:07] [REQUEST] Headers: {'Accept': 'application/json, text/plain, */*', 'Content-Type': 'application/json', 'User-Agent': 'axios/1.11.0', 'Content-Length': '211', 'Accept-Encoding': 'gzip, compress, deflate, br', 'Host': '127.0.0.1:5000', 'Connection': 'keep-alive'}
+[2025-09-20 10:05:07] [REQUEST] Body: {'features': {'gender': 'Female', 'age': 50, 'hypertension': 1, 'heart_disease': 1, 'ever_married': 'No', 'work_type': 'Private', 'Residence_type': 'Urban', 'avg_glucose_level': 400, 'bmi': 60, 'smoking_status': 'formerly smoked'}}
+[2025-09-20 10:05:07] ==================================================
+[2025-09-20 10:05:07] [STROKE] Endpoint hit!
+[2025-09-20 10:05:07] [STROKE] Request method: POST
+[2025-09-20 10:05:07] [STROKE] Request URL: http://127.0.0.1:5000/predict/stroke
+[2025-09-20 10:05:07] [STROKE] Content-Type: application/json
+[2025-09-20 10:05:07] [STROKE] Raw data length: 211
+[2025-09-20 10:05:07] [STROKE] Raw data (first 200 chars): b'{"features":{"gender":"Female","age":50,"hypertension":1,"heart_disease":1,"ever_married":"No","work_type":"Private","Residence_type":"Urban","avg_glucose_level":400,"bmi":60,"smoking_status":"formerl'
+[2025-09-20 10:05:07] [STROKE] Parsed JSON: {'features': {'gender': 'Female', 'age': 50, 'hypertension': 1, 'heart_disease': 1, 'ever_married': 'No', 'work_type': 'Private', 'Residence_type': 'Urban', 'avg_glucose_level': 400, 'bmi': 60, 'smoking_status': 'formerly smoked'}}
+[2025-09-20 10:05:07] [STROKE] Features: {'gender': 'Female', 'age': 50, 'hypertension': 1, 'heart_disease': 1, 'ever_married': 'No', 'work_type': 'Private', 'Residence_type': 'Urban', 'avg_glucose_level': 400, 'bmi': 60, 'smoking_status': 'formerly smoked'}
+[2025-09-20 10:05:07] [STROKE] Final features for model: {'gender': 'Female', 'age': 50, 'hypertension': 1, 'heart_disease': 1, 'ever_married': 'No', 'work_type': 'Private', 'Residence_type': 'Urban', 'avg_glucose_level': 400, 'bmi': 60, 'smoking_status': 'formerly smoked'}
+[2025-09-20 10:05:07] [STROKE] DataFrame created: shape=(1, 10), columns=['gender', 'age', 'hypertension', 'heart_disease', 'ever_married', 'work_type', 'Residence_type', 'avg_glucose_level', 'bmi', 'smoking_status']
+[2025-09-20 10:05:07] [STROKE] DataFrame content:
+   gender  age  hypertension  heart_disease ever_married work_type Residence_type  avg_glucose_level  bmi   smoking_status
+0  Female   50             1              1           No   Private          Urban                400   60  formerly smoked
+[2025-09-20 10:05:07] [STROKE] Model type: <class 'imblearn.pipeline.Pipeline'>
+[2025-09-20 10:05:07] [STROKE] Model class: Pipeline
+[2025-09-20 10:05:07] [STROKE] Attempting prediction...
+[2025-09-20 10:05:07] [STROKE] Raw probability: 0.00046282741823233664
+[2025-09-20 10:05:07] [STROKE] Final prediction: 0 (threshold: 0.22)
+[2025-09-20 10:05:07] [STROKE] Returning result: {'prediction': 0, 'probability': 0.0}
+[2025-09-20 10:05:42] [REQUEST] POST http://127.0.0.1:5000/predict/stroke
+[2025-09-20 10:05:42] [REQUEST] Headers: {'Accept': 'application/json, text/plain, */*', 'Content-Type': 'application/json', 'User-Agent': 'axios/1.11.0', 'Content-Length': '211', 'Accept-Encoding': 'gzip, compress, deflate, br', 'Host': '127.0.0.1:5000', 'Connection': 'keep-alive'}
+[2025-09-20 10:05:42] [REQUEST] Body: {'features': {'gender': 'Female', 'age': 50, 'hypertension': 1, 'heart_disease': 1, 'ever_married': 'No', 'work_type': 'Private', 'Residence_type': 'Urban', 'avg_glucose_level': 400, 'bmi': 60, 'smoking_status': 'formerly smoked'}}
+[2025-09-20 10:05:42] ==================================================
+[2025-09-20 10:05:42] [STROKE] Endpoint hit!
+[2025-09-20 10:05:42] [STROKE] Request method: POST
+[2025-09-20 10:05:42] [STROKE] Request URL: http://127.0.0.1:5000/predict/stroke
+[2025-09-20 10:05:42] [STROKE] Content-Type: application/json
+[2025-09-20 10:05:42] [STROKE] Raw data length: 211
+[2025-09-20 10:05:42] [STROKE] Raw data (first 200 chars): b'{"features":{"gender":"Female","age":50,"hypertension":1,"heart_disease":1,"ever_married":"No","work_type":"Private","Residence_type":"Urban","avg_glucose_level":400,"bmi":60,"smoking_status":"formerl'
+[2025-09-20 10:05:42] [STROKE] Parsed JSON: {'features': {'gender': 'Female', 'age': 50, 'hypertension': 1, 'heart_disease': 1, 'ever_married': 'No', 'work_type': 'Private', 'Residence_type': 'Urban', 'avg_glucose_level': 400, 'bmi': 60, 'smoking_status': 'formerly smoked'}}
+[2025-09-20 10:05:42] [STROKE] Features: {'gender': 'Female', 'age': 50, 'hypertension': 1, 'heart_disease': 1, 'ever_married': 'No', 'work_type': 'Private', 'Residence_type': 'Urban', 'avg_glucose_level': 400, 'bmi': 60, 'smoking_status': 'formerly smoked'}
+[2025-09-20 10:05:42] [STROKE] Final features for model: {'gender': 'Female', 'age': 50, 'hypertension': 1, 'heart_disease': 1, 'ever_married': 'No', 'work_type': 'Private', 'Residence_type': 'Urban', 'avg_glucose_level': 400, 'bmi': 60, 'smoking_status': 'formerly smoked'}
+[2025-09-20 10:05:42] [STROKE] DataFrame created: shape=(1, 10), columns=['gender', 'age', 'hypertension', 'heart_disease', 'ever_married', 'work_type', 'Residence_type', 'avg_glucose_level', 'bmi', 'smoking_status']
+[2025-09-20 10:05:42] [STROKE] DataFrame content:
+   gender  age  hypertension  heart_disease ever_married work_type Residence_type  avg_glucose_level  bmi   smoking_status
+0  Female   50             1              1           No   Private          Urban                400   60  formerly smoked
+[2025-09-20 10:05:42] [STROKE] Model type: <class 'imblearn.pipeline.Pipeline'>
+[2025-09-20 10:05:42] [STROKE] Model class: Pipeline
+[2025-09-20 10:05:42] [STROKE] Attempting prediction...
+[2025-09-20 10:05:42] [STROKE] Raw probability: 0.00046282741823233664
+[2025-09-20 10:05:42] [STROKE] Final prediction: 0 (threshold: 0.22)
+[2025-09-20 10:05:42] [STROKE] Returning result: {'prediction': 0, 'probability': 0.0}
+[2025-09-20 10:06:03] [REQUEST] POST http://127.0.0.1:5000/predict/stroke
+[2025-09-20 10:06:03] [REQUEST] Headers: {'Accept': 'application/json, text/plain, */*', 'Content-Type': 'application/json', 'User-Agent': 'axios/1.11.0', 'Content-Length': '203', 'Accept-Encoding': 'gzip, compress, deflate, br', 'Host': '127.0.0.1:5000', 'Connection': 'keep-alive'}
+[2025-09-20 10:06:03] [REQUEST] Body: {'features': {'gender': 'Female', 'age': 88, 'hypertension': 1, 'heart_disease': 1, 'ever_married': 'Yes', 'work_type': 'Private', 'Residence_type': 'Rural', 'avg_glucose_level': 500, 'bmi': 66, 'smoking_status': 'smokes'}}
+[2025-09-20 10:06:03] ==================================================
+[2025-09-20 10:06:03] [STROKE] Endpoint hit!
+[2025-09-20 10:06:03] [STROKE] Request method: POST
+[2025-09-20 10:06:03] [STROKE] Request URL: http://127.0.0.1:5000/predict/stroke
+[2025-09-20 10:06:03] [STROKE] Content-Type: application/json
+[2025-09-20 10:06:03] [STROKE] Raw data length: 203
+[2025-09-20 10:06:03] [STROKE] Raw data (first 200 chars): b'{"features":{"gender":"Female","age":88,"hypertension":1,"heart_disease":1,"ever_married":"Yes","work_type":"Private","Residence_type":"Rural","avg_glucose_level":500,"bmi":66,"smoking_status":"smokes'
+[2025-09-20 10:06:03] [STROKE] Parsed JSON: {'features': {'gender': 'Female', 'age': 88, 'hypertension': 1, 'heart_disease': 1, 'ever_married': 'Yes', 'work_type': 'Private', 'Residence_type': 'Rural', 'avg_glucose_level': 500, 'bmi': 66, 'smoking_status': 'smokes'}}
+[2025-09-20 10:06:03] [STROKE] Features: {'gender': 'Female', 'age': 88, 'hypertension': 1, 'heart_disease': 1, 'ever_married': 'Yes', 'work_type': 'Private', 'Residence_type': 'Rural', 'avg_glucose_level': 500, 'bmi': 66, 'smoking_status': 'smokes'}
+[2025-09-20 10:06:03] [STROKE] Final features for model: {'gender': 'Female', 'age': 88, 'hypertension': 1, 'heart_disease': 1, 'ever_married': 'Yes', 'work_type': 'Private', 'Residence_type': 'Rural', 'avg_glucose_level': 500, 'bmi': 66, 'smoking_status': 'smokes'}
+[2025-09-20 10:06:03] [STROKE] DataFrame created: shape=(1, 10), columns=['gender', 'age', 'hypertension', 'heart_disease', 'ever_married', 'work_type', 'Residence_type', 'avg_glucose_level', 'bmi', 'smoking_status']
+[2025-09-20 10:06:03] [STROKE] DataFrame content:
+   gender  age  hypertension  heart_disease ever_married work_type Residence_type  avg_glucose_level  bmi smoking_status
+0  Female   88             1              1          Yes   Private          Rural                500   66         smokes
+[2025-09-20 10:06:03] [STROKE] Model type: <class 'imblearn.pipeline.Pipeline'>
+[2025-09-20 10:06:03] [STROKE] Model class: Pipeline
+[2025-09-20 10:06:03] [STROKE] Attempting prediction...
+[2025-09-20 10:06:03] [STROKE] Raw probability: 0.031169939786195755
+[2025-09-20 10:06:03] [STROKE] Final prediction: 0 (threshold: 0.22)
+[2025-09-20 10:06:03] [STROKE] Returning result: {'prediction': 0, 'probability': 0.031}
+[2025-09-20 10:06:06] [REQUEST] POST http://127.0.0.1:5000/predict/stroke
+[2025-09-20 10:06:06] [REQUEST] Headers: {'Accept': 'application/json, text/plain, */*', 'Content-Type': 'application/json', 'User-Agent': 'axios/1.11.0', 'Content-Length': '203', 'Accept-Encoding': 'gzip, compress, deflate, br', 'Host': '127.0.0.1:5000', 'Connection': 'keep-alive'}
+[2025-09-20 10:06:06] [REQUEST] Body: {'features': {'gender': 'Female', 'age': 88, 'hypertension': 1, 'heart_disease': 1, 'ever_married': 'Yes', 'work_type': 'Private', 'Residence_type': 'Rural', 'avg_glucose_level': 500, 'bmi': 66, 'smoking_status': 'smokes'}}
+[2025-09-20 10:06:06] ==================================================
+[2025-09-20 10:06:06] [STROKE] Endpoint hit!
+[2025-09-20 10:06:06] [STROKE] Request method: POST
+[2025-09-20 10:06:06] [STROKE] Request URL: http://127.0.0.1:5000/predict/stroke
+[2025-09-20 10:06:06] [STROKE] Content-Type: application/json
+[2025-09-20 10:06:06] [STROKE] Raw data length: 203
+[2025-09-20 10:06:06] [STROKE] Raw data (first 200 chars): b'{"features":{"gender":"Female","age":88,"hypertension":1,"heart_disease":1,"ever_married":"Yes","work_type":"Private","Residence_type":"Rural","avg_glucose_level":500,"bmi":66,"smoking_status":"smokes'
+[2025-09-20 10:06:06] [STROKE] Parsed JSON: {'features': {'gender': 'Female', 'age': 88, 'hypertension': 1, 'heart_disease': 1, 'ever_married': 'Yes', 'work_type': 'Private', 'Residence_type': 'Rural', 'avg_glucose_level': 500, 'bmi': 66, 'smoking_status': 'smokes'}}
+[2025-09-20 10:06:06] [STROKE] Features: {'gender': 'Female', 'age': 88, 'hypertension': 1, 'heart_disease': 1, 'ever_married': 'Yes', 'work_type': 'Private', 'Residence_type': 'Rural', 'avg_glucose_level': 500, 'bmi': 66, 'smoking_status': 'smokes'}
+[2025-09-20 10:06:06] [STROKE] Final features for model: {'gender': 'Female', 'age': 88, 'hypertension': 1, 'heart_disease': 1, 'ever_married': 'Yes', 'work_type': 'Private', 'Residence_type': 'Rural', 'avg_glucose_level': 500, 'bmi': 66, 'smoking_status': 'smokes'}
+[2025-09-20 10:06:06] [STROKE] DataFrame created: shape=(1, 10), columns=['gender', 'age', 'hypertension', 'heart_disease', 'ever_married', 'work_type', 'Residence_type', 'avg_glucose_level', 'bmi', 'smoking_status']
+[2025-09-20 10:06:06] [STROKE] DataFrame content:
+   gender  age  hypertension  heart_disease ever_married work_type Residence_type  avg_glucose_level  bmi smoking_status
+0  Female   88             1              1          Yes   Private          Rural                500   66         smokes
+[2025-09-20 10:06:06] [STROKE] Model type: <class 'imblearn.pipeline.Pipeline'>
+[2025-09-20 10:06:06] [STROKE] Model class: Pipeline
+[2025-09-20 10:06:06] [STROKE] Attempting prediction...
+[2025-09-20 10:06:06] [STROKE] Raw probability: 0.031169939786195755
+[2025-09-20 10:06:06] [STROKE] Final prediction: 0 (threshold: 0.22)
+[2025-09-20 10:06:06] [STROKE] Returning result: {'prediction': 0, 'probability': 0.031}
+[2025-09-20 10:06:10] [REQUEST] POST http://127.0.0.1:5000/predict/stroke
+[2025-09-20 10:06:10] [REQUEST] Headers: {'Accept': 'application/json, text/plain, */*', 'Content-Type': 'application/json', 'User-Agent': 'axios/1.11.0', 'Content-Length': '201', 'Accept-Encoding': 'gzip, compress, deflate, br', 'Host': '127.0.0.1:5000', 'Connection': 'keep-alive'}
+[2025-09-20 10:06:10] [REQUEST] Body: {'features': {'gender': 'Male', 'age': 88, 'hypertension': 1, 'heart_disease': 1, 'ever_married': 'Yes', 'work_type': 'Private', 'Residence_type': 'Rural', 'avg_glucose_level': 500, 'bmi': 66, 'smoking_status': 'smokes'}}
+[2025-09-20 10:06:10] ==================================================
+[2025-09-20 10:06:10] [STROKE] Endpoint hit!
+[2025-09-20 10:06:10] [STROKE] Request method: POST
+[2025-09-20 10:06:10] [STROKE] Request URL: http://127.0.0.1:5000/predict/stroke
+[2025-09-20 10:06:10] [STROKE] Content-Type: application/json
+[2025-09-20 10:06:10] [STROKE] Raw data length: 201
+[2025-09-20 10:06:10] [STROKE] Raw data (first 200 chars): b'{"features":{"gender":"Male","age":88,"hypertension":1,"heart_disease":1,"ever_married":"Yes","work_type":"Private","Residence_type":"Rural","avg_glucose_level":500,"bmi":66,"smoking_status":"smokes"}'
+[2025-09-20 10:06:10] [STROKE] Parsed JSON: {'features': {'gender': 'Male', 'age': 88, 'hypertension': 1, 'heart_disease': 1, 'ever_married': 'Yes', 'work_type': 'Private', 'Residence_type': 'Rural', 'avg_glucose_level': 500, 'bmi': 66, 'smoking_status': 'smokes'}}
+[2025-09-20 10:06:10] [STROKE] Features: {'gender': 'Male', 'age': 88, 'hypertension': 1, 'heart_disease': 1, 'ever_married': 'Yes', 'work_type': 'Private', 'Residence_type': 'Rural', 'avg_glucose_level': 500, 'bmi': 66, 'smoking_status': 'smokes'}
+[2025-09-20 10:06:10] [STROKE] Final features for model: {'gender': 'Male', 'age': 88, 'hypertension': 1, 'heart_disease': 1, 'ever_married': 'Yes', 'work_type': 'Private', 'Residence_type': 'Rural', 'avg_glucose_level': 500, 'bmi': 66, 'smoking_status': 'smokes'}
+[2025-09-20 10:06:10] [STROKE] DataFrame created: shape=(1, 10), columns=['gender', 'age', 'hypertension', 'heart_disease', 'ever_married', 'work_type', 'Residence_type', 'avg_glucose_level', 'bmi', 'smoking_status']
+[2025-09-20 10:06:10] [STROKE] DataFrame content:
+  gender  age  hypertension  heart_disease ever_married work_type Residence_type  avg_glucose_level  bmi smoking_status
+0   Male   88             1              1          Yes   Private          Rural                500   66         smokes
+[2025-09-20 10:06:10] [STROKE] Model type: <class 'imblearn.pipeline.Pipeline'>
+[2025-09-20 10:06:10] [STROKE] Model class: Pipeline
+[2025-09-20 10:06:10] [STROKE] Attempting prediction...
+[2025-09-20 10:06:10] [STROKE] Raw probability: 0.10122521221637726
+[2025-09-20 10:06:10] [STROKE] Final prediction: 0 (threshold: 0.22)
+[2025-09-20 10:06:10] [STROKE] Returning result: {'prediction': 0, 'probability': 0.101}
+[2025-09-20 10:07:30] [VERSIONS] {'python': 'Python 3.12.2', 'sklearn': '1.6.1', 'numpy': '1.26.4', 'scipy': '1.13.1', 'pandas': '2.2.2', 'joblib': '1.4.2'}
+[2025-09-20 10:07:30] [LOAD] models loaded successfully
+[2025-09-20 10:07:30] [STARTUP] Starting server on port 5000
+[2025-09-20 10:11:23] [REQUEST] POST http://127.0.0.1:5000/predict/stroke
+[2025-09-20 10:11:23] [REQUEST] Headers: {'Accept': 'application/json, text/plain, */*', 'Content-Type': 'application/json', 'User-Agent': 'axios/1.11.0', 'Content-Length': '201', 'Accept-Encoding': 'gzip, compress, deflate, br', 'Host': '127.0.0.1:5000', 'Connection': 'keep-alive'}
+[2025-09-20 10:11:23] [REQUEST] Body: {'features': {'gender': 'Male', 'age': 88, 'hypertension': 1, 'heart_disease': 1, 'ever_married': 'Yes', 'work_type': 'Private', 'Residence_type': 'Rural', 'avg_glucose_level': 500, 'bmi': 66, 'smoking_status': 'smokes'}}
+[2025-09-20 10:11:23] ==================================================
+[2025-09-20 10:11:23] [STROKE] Endpoint hit!
+[2025-09-20 10:11:23] [STROKE] Request method: POST
+[2025-09-20 10:11:23] [STROKE] Request URL: http://127.0.0.1:5000/predict/stroke
+[2025-09-20 10:11:23] [STROKE] Content-Type: application/json
+[2025-09-20 10:11:23] [STROKE] Raw data length: 201
+[2025-09-20 10:11:23] [STROKE] Raw data (first 200 chars): b'{"features":{"gender":"Male","age":88,"hypertension":1,"heart_disease":1,"ever_married":"Yes","work_type":"Private","Residence_type":"Rural","avg_glucose_level":500,"bmi":66,"smoking_status":"smokes"}'
+[2025-09-20 10:11:23] [STROKE] Parsed JSON: {'features': {'gender': 'Male', 'age': 88, 'hypertension': 1, 'heart_disease': 1, 'ever_married': 'Yes', 'work_type': 'Private', 'Residence_type': 'Rural', 'avg_glucose_level': 500, 'bmi': 66, 'smoking_status': 'smokes'}}
+[2025-09-20 10:11:23] [STROKE] Features: {'gender': 'Male', 'age': 88, 'hypertension': 1, 'heart_disease': 1, 'ever_married': 'Yes', 'work_type': 'Private', 'Residence_type': 'Rural', 'avg_glucose_level': 500, 'bmi': 66, 'smoking_status': 'smokes'}
+[2025-09-20 10:11:23] [STROKE] Final features for model: {'gender': 'Male', 'age': 88, 'hypertension': 1, 'heart_disease': 1, 'ever_married': 'Yes', 'work_type': 'Private', 'Residence_type': 'Rural', 'avg_glucose_level': 500, 'bmi': 66, 'smoking_status': 'smokes'}
+[2025-09-20 10:11:23] [STROKE] DataFrame created: shape=(1, 10), columns=['gender', 'age', 'hypertension', 'heart_disease', 'ever_married', 'work_type', 'Residence_type', 'avg_glucose_level', 'bmi', 'smoking_status']
+[2025-09-20 10:11:23] [STROKE] DataFrame content:
+  gender  age  hypertension  heart_disease ever_married work_type Residence_type  avg_glucose_level  bmi smoking_status
+0   Male   88             1              1          Yes   Private          Rural                500   66         smokes
+[2025-09-20 10:11:23] [STROKE] Model type: <class 'imblearn.pipeline.Pipeline'>
+[2025-09-20 10:11:23] [STROKE] Model class: Pipeline
+[2025-09-20 10:11:23] [STROKE] Attempting prediction...
+[2025-09-20 10:11:23] [STROKE] Raw probability: 0.10122521221637726
+[2025-09-20 10:11:23] [STROKE] Final prediction: 0 (threshold: 0.22)
+[2025-09-20 10:11:23] [STROKE] Returning result: {'prediction': 0, 'probability': 0.101}
+[2025-09-20 10:11:51] [REQUEST] POST http://127.0.0.1:5000/predict/diabetes
+[2025-09-20 10:11:51] [REQUEST] Headers: {'Accept': 'application/json, text/plain, */*', 'Content-Type': 'application/json', 'User-Agent': 'axios/1.11.0', 'Content-Length': '143', 'Accept-Encoding': 'gzip, compress, deflate, br', 'Host': '127.0.0.1:5000', 'Connection': 'keep-alive'}
+[2025-09-20 10:11:51] [REQUEST] Body: {'features': {'Pregnancies': 2, 'Glucose': 30, 'BloodPressure': 80, 'SkinThickness': 25, 'Insulin': 90, 'BMI': 30, 'DiabetesPedigreeFunction': 0.6, 'Age': 55}}
+[2025-09-20 10:11:51] [DIABETES] Endpoint hit!
+[2025-09-20 10:12:24] [VERSIONS] {'python': 'Python 3.12.2', 'sklearn': '1.6.1', 'numpy': '1.26.4', 'scipy': '1.13.1', 'pandas': '2.2.2', 'joblib': '1.4.2'}
+[2025-09-20 10:12:25] [LOAD] models loaded successfully
+[2025-09-20 10:12:25] [STARTUP] Starting server on port 5000
